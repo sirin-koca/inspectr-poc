@@ -1,0 +1,47 @@
+{
+  "ruleset": {
+    "id": "inspectr-aia-poc",
+    "name": "InspectR EU AI Act PoC Ruleset",
+    "regulation": "Regulation (EU) 2024/1689",
+    "source": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+    "version": "0.1"
+  },
+  "rules": [
+    {
+      "rule_id": "AIA-5-1-C",
+      "name": "Prohibited Social Scoring",
+      "legal_reference": "Article 5(1)(c)",
+      "taxonomy_constraint": "Constraint.ProhibitSocialScoring",
+      "severity": "prohibited",
+      "evidence_fields": [
+        "social_scoring",
+        "evaluates_natural_persons",
+        "based_on_social_behaviour_or_personal_characteristics",
+        "social_score",
+        "detrimental_or_unfavourable_treatment",
+        "unrelated_context",
+        "unjustified_or_disproportionate_treatment"
+      ],
+      "evaluation": {
+        "type": "social_scoring_prohibition"
+      },
+      "remedy": "Remove the prohibited social-scoring functionality or redesign the pipeline so that the conditions of Article 5(1)(c) are not met."
+    },
+    {
+      "rule_id": "AIA-5-1-G",
+      "name": "Prohibited Biometric Categorisation",
+      "legal_reference": "Article 5(1)(g)",
+      "taxonomy_constraint": "Constraint.ProhibitBiometricCategorisationSensitiveAttributes",
+      "severity": "prohibited",
+      "evidence_fields": [
+        "biometric_categorisation",
+        "uses_biometric_data",
+        "infers_sensitive_attributes"
+      ],
+      "evaluation": {
+        "type": "biometric_sensitive_categorisation"
+      },
+      "remedy": "Remove or redesign biometric categorisation functionality that infers protected or sensitive characteristics."
+    }
+  ]
+}

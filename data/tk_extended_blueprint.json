@@ -1,0 +1,82 @@
+{
+  "schema_version": "inlumen.project@2",
+  "pipeline": {
+    "nodes": [
+      {
+        "id": "1",
+        "kind": "source",
+        "label": "tk_request_intake",
+        "compliance_extensions": {
+          "has_logging": true
+        }
+      },
+      {
+        "id": "2",
+        "kind": "task",
+        "label": "validate_request",
+        "compliance_extensions": {
+          "has_logging": true,
+          "uses_ai": false
+        }
+      },
+      {
+        "id": "3",
+        "kind": "task",
+        "label": "retrieve_relevant_data",
+        "compliance_extensions": {
+          "has_logging": true,
+          "data_taxonomy_tags": ["AtomicElement.PersonalData.SickLeave"],
+          "contains_biometric_raw": false
+        }
+      },
+      {
+        "id": "4",
+        "kind": "task",
+        "label": "process_data_for_compliance",
+        "compliance_extensions": {
+          "has_logging": true,
+          "anonymization_applied": "aggregation"
+        }
+      },
+      {
+        "id": "5",
+        "kind": "task",
+        "label": "run_compliance_checks",
+        "compliance_extensions": {
+          "has_logging": true,
+          "uses_ai": true,
+          "ai_taxonomy_tags": ["AtomicElement.AIComponent.LLM"],
+          "social_scoring_enabled": false,
+          "biometric_categorization_enabled": false
+        }
+      },
+      {
+        "id": "6",
+        "kind": "task",
+        "label": "prepare_sharing_decision",
+        "compliance_extensions": {
+          "has_logging": true,
+          "uses_ai": true,
+          "ai_taxonomy_tags": ["AtomicElement.AIComponent.DecisionSupportAgent"],
+          "has_human_override_node": true
+        }
+      },
+      {
+        "id": "7",
+        "kind": "destination",
+        "label": "tk_decision_output",
+        "compliance_extensions": {
+          "has_logging": true
+        }
+      }
+    ],
+    "connections": [
+      { "from": {"node": "1"}, "to": {"node": "2"} },
+      { "from": {"node": "2"}, "to": {"node": "3"} },
+      { "from": {"node": "3"}, "to": {"node": "4"} },
+      { "from": {"node": "4"}, "to": {"node": "5"} },
+      { "from": {"node": "5"}, "to": {"node": "6"} },
+      { "from": {"node": "6"}, "to": {"node": "7"} }
+    ]
+  }
+}

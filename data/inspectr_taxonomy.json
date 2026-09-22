@@ -1,0 +1,225 @@
+{
+  "id": "InspectR.Taxonomy",
+  "label": "InspectR",
+  "level": "Root",
+  "description": "Root of InspectR taxonomy",
+  "children": [
+    {
+      "id": "TK.PipelineStructure",
+      "label": "TK Pipeline Structure",
+      "level": "Domain",
+      "description": "Structural pipeline requirements",
+      "color": "#FF77DC",
+      "children": [
+        {
+          "id": "TK.PipelineStructure.MandatoryStages",
+          "label": "Mandatory Stages",
+          "level": "Dimension",
+          "description": "Stages that MUST exist in TK pipeline",
+          "children": [
+            {
+              "id": "TK.Stage.Intake",
+              "label": "Intake",
+              "level": "Atomic Element",
+              "description": "Request intake stage"
+            },
+            {
+              "id": "TK.Stage.Validation",
+              "label": "Validation",
+              "level": "Atomic Element",
+              "description": "Request validation stage"
+            },
+            {
+              "id": "TK.Stage.DataRetrieval",
+              "label": "Data Retrieval",
+              "level": "Atomic Element",
+              "description": "Data retrieval stage"
+            },
+            {
+              "id": "TK.Stage.CompliancePreparation",
+              "label": "Compliance Preparation",
+              "level": "Atomic Element",
+              "description": "Compliance preparation stage"
+            },
+            {
+              "id": "TK.Stage.ComplianceChecks",
+              "label": "Compliance Checks",
+              "level": "Atomic Element",
+              "description": "Compliance checks stage"
+            },
+            {
+              "id": "TK.Stage.DecisionSupport",
+              "label": "Decision Support",
+              "level": "Atomic Element",
+              "description": "Decision support stage"
+            },
+            {
+              "id": "TK.Stage.OutputDelivery",
+              "label": "Output Delivery",
+              "level": "Atomic Element",
+              "description": "Output delivery stage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TK.ComplianceRequirements",
+      "label": "Compliance Requirements (TK UC)",
+      "level": "Domain",
+      "description": "Compliance requirements from TK UC",
+      "color": "#FDB033",
+      "children": [
+        {
+          "id": "TK.MetadataCompleteness",
+          "label": "Metadata Completeness",
+          "level": "Dimension",
+          "description": "Metadata completeness checks",
+          "children": [
+            {
+              "id": "TK.RequestMetadata",
+              "label": "Request Metadata",
+              "level": "Atomic Element",
+              "description": "Request metadata must be complete"
+            }
+          ]
+        },
+        {
+          "id": "TK.LawfulDataRetrieval",
+          "label": "Lawful Data Retrieval",
+          "level": "Dimension",
+          "description": "Lawful data retrieval constraints",
+          "children": [
+            {
+              "id": "TK.NecessaryDataOnly",
+              "label": "Necessary Data Only",
+              "level": "Atomic Element",
+              "description": "Only necessary data may be retrieved"
+            }
+          ]
+        },
+        {
+          "id": "TK.DPIARiskAssessment",
+          "label": "DPIA & Risk Assessment",
+          "level": "Dimension",
+          "description": "DPIA and risk assessment requirements",
+          "children": [
+            {
+              "id": "TK.RiskChecksPresent",
+              "label": "Risk Checks Present",
+              "level": "Atomic Element",
+              "description": "Risk checks must be present"
+            }
+          ]
+        },
+        {
+          "id": "TK.HumanOversight",
+          "label": "Human Oversight",
+          "level": "Dimension",
+          "description": "Human oversight requirements",
+          "children": [
+            {
+              "id": "TK.HumanReviewBeforeSharing",
+              "label": "Human Review Before Sharing",
+              "level": "Atomic Element",
+              "description": "Human review required before sharing"
+            }
+          ]
+        },
+        {
+          "id": "TK.LoggingTraceability",
+          "label": "Logging & Traceability",
+          "level": "Dimension",
+          "description": "Logging and traceability requirements",
+          "children": [
+            {
+              "id": "TK.LoggingEnabled",
+              "label": "Logging Enabled",
+              "level": "Atomic Element",
+              "description": "Logging must be enabled"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "AIA.Subset",
+      "label": "EU AI Act Subset",
+      "level": "Domain",
+      "description": "Selected EU AI Act provisions represented in the InspectR PoC",
+      "color": "navy",
+      "regulation": "Regulation (EU) 2024/1689",
+      "regulation_link": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+      "children": [
+        {
+          "id": "AIA.ProhibitedPractices",
+          "label": "Prohibited Practices (Art. 5)",
+          "level": "Dimension",
+          "description": "Selected prohibited AI practices under Article 5",
+          "ai_act_article": "Article 5",
+          "ai_act_link": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng",
+          "children": [
+            {
+              "id": "AtomicElement.SocialScore",
+              "label": "Social Scoring",
+              "level": "Atomic Element",
+              "description": "Social scoring prohibition represented in the PoC",
+              "ai_act_article": "Article 5(1)(c)",
+              "ai_act_link": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng"
+            },
+            {
+              "id": "AtomicElement.BiometricSensitiveInference",
+              "label": "Biometric Sensitive Inference",
+              "level": "Atomic Element",
+              "description": "Biometric categorisation involving specified sensitive characteristics",
+              "ai_act_article": "Article 5(1)(g)",
+              "ai_act_link": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng"
+            }
+          ]
+        },
+        {
+          "id": "AIA.HumanAgencyOversight",
+          "label": "Human Agency & Oversight",
+          "level": "Dimension",
+          "description": "Human agency and oversight concept represented in the current taxonomy",
+          "children": [
+            {
+              "id": "AIA.HumanInTheLoop",
+              "label": "Human-in-the-Loop",
+              "level": "Atomic Element",
+              "description": "Human-in-the-loop represented in the current taxonomy"
+            }
+          ]
+        },
+        {
+          "id": "AIA.TransparencyDocumentation",
+          "label": "Transparency & Documentation",
+          "level": "Dimension",
+          "description": "Transparency and documentation concept represented in the current taxonomy",
+          "children": [
+            {
+              "id": "AIA.ExplainableDecisionPath",
+              "label": "Explainable Decision Path",
+              "level": "Atomic Element",
+              "description": "Decision path must be explainable"
+            }
+          ]
+        },
+        {
+          "id": "AIA.DataGovernance",
+          "label": "Data Governance",
+          "level": "Dimension",
+          "description": "Data governance concept represented in the current taxonomy",
+          "children": [
+            {
+              "id": "AIA.DataMinimisation",
+              "label": "Data Minimisation",
+              "level": "Atomic Element",
+              "description": "Data minimisation represented in the current taxonomy"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
