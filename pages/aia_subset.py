@@ -1,38 +1,44 @@
 import streamlit as st
 
+
 st.subheader("EU AI Act Subset")
 
 st.write(
     """
-    - The InspectR PoC will investigate a minimal subset of the EU Artificial
-    Intelligence Act which are most suitable for the TK UC.     
-    - The selected provisions 
-    will be translated into machine-readable Policy-as-Code rules and evaluated against 
-    the TK inLUMEN pipeline blueprint.
-    - It is therefore crucial to build the pipeline artifact with sufficient information and identify 
-    the most suitable and applicabple AIA subset in order to demonstrate InspectR's capabilities and 
-    limitations in a meaningful way.
-    - The purpose is to explore how selected legal requirements can be
-    translated into machine-readable Policy-as-Code (PaC) rules and
-    evaluated against information available in the TK pipeline blueprint.
+    The current InspectR PoC uses a small, provisional subset of the
+    EU Artificial Intelligence Act (AIA) to demonstrate how legal
+    requirements can be operationalized as machine-executable
+    Policy-as-Code and evaluated against the TK pipeline blueprint.
+
+    The purpose at this stage is to demonstrate the InspectR mechanism,
+    not to establish full AI Act compliance. The final regulatory subset
+    and its technical interpretation require further legal analysis and
+    validation.
     """
 )
+
 st.divider()
 
 # --------------------------------------------------
-# CANDIDATE AIA PROVISIONS
+# CURRENT POC RULES
 # --------------------------------------------------
 
-st.markdown("### Candidate AIA Provisions - work-in-progress")
+st.markdown("### Current PoC Rules")
 
 st.markdown(
     """
-| Candidate Rule | AIA Provision | What the provision addresses |
-|---|---|---|
-| `AIA-5-1-B` | [Article 5(1)(b)](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R1689#art_5) | Exploitation of vulnerabilities related to age, disability, or a specific social or economic situation, under the conditions defined by the provision. |
-| `AIA-5-1-C` | [Article 5(1)(c)](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R1689#art_5) | Evaluation or classification of persons resulting in prohibited social-scoring outcomes. |
-| `AIA-5-1-G` | [Article 5(1)(g)](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R1689#art_5) | Biometric categorisation used to deduce or infer the sensitive characteristics specified by the provision, subject to its stated exclusions. |
+| InspectR Rule | AIA Provision | PoC Focus | Blueprint Evidence |
+|---|---|---|---|
+| `AIA-10` | [Article 10 — Data and data governance](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R1689#art_10) | Data source provenance and approval | `source_id`, `approved_source` |
+| `AIA-12` | [Article 12 — Record-keeping](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R1689#art_12) | Logging capability | `has_logging` |
+| `AIA-14` | [Article 14 — Human oversight](https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32024R1689#art_14) | Human oversight for automated decision support | `automated_decision_support`, `human_oversight` |
 """
+)
+
+st.caption(
+    "PoC operationalization: these checks represent selected aspects "
+    "of the provisions for technical demonstration. They do not establish "
+    "full conformity with Articles 10, 12, or 14."
 )
 
 st.caption(
@@ -41,74 +47,64 @@ st.caption(
 
 st.divider()
 
+
 # --------------------------------------------------
-# POLICY-AS-CODE INVESTIGATION
+# POLICY-AS-CODE
 # --------------------------------------------------
 
 st.markdown("### From Legal Requirement to Inspectable Rule")
 
-
 st.write(
     """
-    The PoC investigates how a legal requirement can be decomposed into
-    conditions that InspectR could evaluate using information represented
-    in a pipeline blueprint.
+    InspectR translates selected regulatory requirements into explicit
+    Rego rules. OPA evaluates these rules against evidence declared in
+    the pipeline blueprint.
     """
 )
 
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown("#### Rule Path")
+    st.markdown("#### Evaluation Path")
 
     st.code(
         """
 AIA Provision
       ↓
-Legal Conditions
+PoC Operationalization
       ↓
-Machine-readable PaC Rule
+Rego Policy
       ↓
-Applicability
-Does this rule apply here?
+Blueprint Evidence
       ↓
-Required Evidence
-What must the blueprint tell us?
-      ↓
-Evaluation
-What does the available evidence establish?
+OPA Evaluation
       ↓
 OK / FAIL / HUMAN
 """,
         language="text",
     )
 
+
 with col2:
-    st.markdown("#### Proposed Evaluation Outcomes")
+    st.markdown("#### Evaluation Outcomes")
 
     st.success(
-        "OK — sufficient blueprint evidence supports satisfaction "
-        "of the encoded requirement."
+        "OK — available blueprint evidence satisfies "
+        "the encoded rule."
     )
 
     st.error(
-        "FAIL — sufficient blueprint evidence demonstrates "
-        "non-conformance with the encoded requirement."
+        "FAIL — available blueprint evidence does not satisfy "
+        "the encoded rule."
     )
 
     st.warning(
-        "HUMAN — the available blueprint evidence is insufficient "
-        "for an automated determination."
+        "HUMAN — the available evidence is insufficient for "
+        "an automated determination or requires human review."
     )
 
-    st.markdown("#### Key Question")
 
-    st.write(
-        """
-        **Does the current inLUMEN blueprint provide the information
-        InspectR needs to determine applicability and evaluate the rule?**
-        """
-    )
+st.divider()
 
 # --------------------------------------------------
 # FOOTER

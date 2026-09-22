@@ -1,6 +1,8 @@
 import json
 import streamlit as st
-from src.evaluator import evaluate  
+
+from src.evaluator import evaluate
+
 
 st.caption(
     "Direct evaluation of the uploaded JSON pipeline blueprint "
@@ -17,7 +19,7 @@ st.divider()
 
 upload_col, arrow_1, evaluate_col, arrow_2, result_col = st.columns(
     [3.2, 0.35, 2.2, 0.35, 1.7],
-    vertical_alignment="top"
+    vertical_alignment="top",
 )
 
 
@@ -38,11 +40,15 @@ with upload_col:
         try:
             blueprint = json.load(uploaded_file)
 
+            # Only reset results when a different file is uploaded
+            if (
+                st.session_state.get("blueprint_filename")
+                != uploaded_file.name
+            ):
+                st.session_state["evaluation_results"] = None
+
             st.session_state["blueprint"] = blueprint
             st.session_state["blueprint_filename"] = uploaded_file.name
-
-            # A new blueprint invalidates previous results
-            st.session_state["evaluation_results"] = None
 
         except json.JSONDecodeError:
             st.error("Invalid JSON file.")
@@ -61,7 +67,10 @@ with upload_col:
 # ---------------------------------------------------------
 
 with arrow_1:
-    st.markdown("<br><br><h3>→</h3>", unsafe_allow_html=True)
+    st.markdown(
+        "<br><br><h3>→</h3>",
+        unsafe_allow_html=True,
+    )
 
 
 # ---------------------------------------------------------
@@ -71,7 +80,9 @@ with arrow_1:
 with evaluate_col:
     st.markdown("### EVALUATE")
 
-    blueprint_available = st.session_state.get("blueprint") is not None
+    blueprint_available = (
+        st.session_state.get("blueprint") is not None
+    )
 
     evaluate_clicked = st.button(
         "Run InspectR",
@@ -92,21 +103,21 @@ with evaluate_col:
     )
 
     if evaluate_clicked:
-        blueprint = st.session_state["blueprint"]
+        with st.spinner(
+            "InspectR is evaluating the pipeline blueprint..."
+        ):
+            try:
+                results = evaluate(
+                    st.session_state["blueprint"]
+                )
 
-        # InspectR engine will be connected here:
-            
-    if evaluate_clicked:
+                st.session_state["evaluation_results"] = results
 
-        with st.spinner("InspectR is evaluating the pipeline blueprint..."):
+                st.success("Evaluation complete.")
 
-            results = evaluate(
-                st.session_state["blueprint"]
-            )
-
-            st.session_state["evaluation_results"] = results
-
-            st.success("Evaluation complete.")
+            except Exception as error:
+                st.session_state["evaluation_results"] = None
+                st.error(f"Evaluation failed: {error}")
 
 
 # ---------------------------------------------------------
@@ -114,12 +125,16 @@ with evaluate_col:
 # ---------------------------------------------------------
 
 with arrow_2:
-    st.markdown("<br><br><h3>→</h3>", unsafe_allow_html=True)
+    st.markdown(
+        "<br><br><h3>→</h3>",
+        unsafe_allow_html=True,
+    )
 
 
 # ---------------------------------------------------------
 # RESULT
 # ---------------------------------------------------------
+
 with result_col:
     st.markdown("### RESULT")
 
@@ -128,53 +143,73 @@ with result_col:
     if results is None:
         st.caption("Run InspectR to generate results.")
 
+    elif len(results) == 0:
+        st.warning("No policy evaluation results returned.")
+
     else:
-
         for result in results:
-
-            status = result["status"]
+            status = result.get("status", "HUMAN")
+            rule = result.get("rule", "Unknown rule")
 
             if status == "OK":
-                st.success(f"OK — {result['rule']}")
+                st.success(f"OK — {rule}")
 
             elif status == "FAIL":
-                st.error(f"FAIL — {result['rule']}")
+                st.error(f"FAIL — {rule}")
 
             else:
-                st.warning(f"HUMAN — {result['rule']}")
+                st.warning(f"HUMAN — {rule}")
 
-            with st.expander(result["legal_reference"]):
+            legal_reference = result.get(
+                "legal_reference",
+                "Policy details",
+            )
+
+            with st.expander(legal_reference):
 
                 st.write("**Reason**")
-                st.write(result["reason"])
+                st.write(
+                    result.get(
+                        "reason",
+                        "No reason provided.",
+                    )
+                )
 
                 st.write("**Evidence**")
-                st.json(result["evidence"])
+                st.json(
+                    result.get(
+                        "evidence",
+                        {},
+                    )
+                )
 
-                if result["remedy"]:
+                remedy = result.get("remedy")
+
+                if remedy:
                     st.write("**Remedy**")
-                    st.write(result["remedy"])
+                    st.write(remedy)
+
 
 # ---------------------------------------------------------
-
+# FOOTER
+# ---------------------------------------------------------
 
 st.markdown(
-"""
-<style>
-.inspectr-footer {
-    position: fixed;
-    bottom: 20px;
-    left: 270px;
-    color: #8a8a8a;
-    font-size: 0.85rem;
-    z-index: 999;
-}
-</style>
+    """
+    <style>
+    .inspectr-footer {
+        position: fixed;
+        bottom: 20px;
+        left: 270px;
+        color: #8a8a8a;
+        font-size: 0.85rem;
+        z-index: 999;
+    }
+    </style>
 
-<div class="inspectr-footer">
-    InspectR PoC — Architecting a Compliance Engine for Multi-Agent Data Pipeline Ecosystems
-</div>
-""",
-unsafe_allow_html=True,
+    <div class="inspectr-footer">
+        InspectR PoC — Architecting a Compliance Engine for Multi-Agent Data Pipeline Ecosystems
+    </div>
+    """,
+    unsafe_allow_html=True,
 )
-

@@ -29,18 +29,23 @@ if "evaluation_results" not in st.session_state:
 # --------------------------------------------------
 
 pages = [
-    st.Page("pages/main.py", title="Main", default=True),
-    st.Page("pages/research.py", title="Research"),
-    st.Page("pages/tk_uc.py", title="TK UC"),
-    st.Page("pages/taxonomy.py", title="Taxonomy"),
-    st.Page("pages/aia_subset.py", title="AIA Subset"),
-    st.Page("pages/pac.py", title="PaC"),
-    st.Page("pages/architecture.py", title="Architecture"),
-    st.Page("pages/evaluation.py", title="Evaluation"),
+    st.Page("pages/main.py", title=":: InspectR", default=True),
+    st.Page("pages/tk_uc.py", title=":: TK UC"),
+    st.Page("pages/research.py", title=":: Research"),
+    st.Page("pages/taxonomy.py", title=":: Taxonomy"),
+    st.Page("pages/aia_subset.py", title=":: AIA Subset"),
+    st.Page("pages/pac.py", title=":: PaC / OPA"),
+    st.Page("pages/architecture.py", title=":: Architecture"),
+    st.Page("pages/evaluation.py", title=":: Evaluation"),
+    st.Page("pages/test.py", title=":: Test"),
 ]
 
 pg = st.navigation(pages)
 
+st.sidebar.image(
+    "images/datapact-logo.png",
+    width=140
+)
 # --------------------------------------------------
 # GLOBAL FOOTER
 # --------------------------------------------------

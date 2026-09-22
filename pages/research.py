@@ -1,10 +1,15 @@
 import streamlit as st
 
-st.subheader("Research Questions")
+st.markdown("### Core Investigation")
 
-st.divider()
+st.info(
+    """
+    How can compliance requirements be operationalized and automatically evaluated 
+    against data pipeline designs at design time?
+    """
+)
 
-st.markdown("### RQ1 — Design-Time Compliance")
+st.markdown("#### RQ1 — Design-Time Compliance")
 st.write(
     """
     What compliance-relevant conclusions can be reliably derived from a
@@ -12,7 +17,7 @@ st.write(
     """
 )
 
-st.markdown("### RQ2 — Rule Codification")
+st.markdown("#### RQ2 — Rule Codification")
 st.write(
     """
     How can selected regulatory requirements be translated into machine-readable
@@ -20,7 +25,7 @@ st.write(
     """
 )
 
-st.markdown("### RQ3 — Rule Applicability")
+st.markdown("#### RQ3 — Rule Applicability")
 st.write(
     """
     How can InspectR determine which Policy-as-Code rules and compliance
@@ -28,7 +33,7 @@ st.write(
     """
 )
 
-st.markdown("### RQ4 — Evidence Sufficiency")
+st.markdown("#### RQ4 — Evidence Sufficiency")
 st.write(
     """
     What design-time evidence must a pipeline blueprint provide for InspectR
@@ -36,7 +41,7 @@ st.write(
     """
 )
 
-st.markdown("### RQ5 — Blueprint Requirements")
+st.markdown("#### RQ5 — Blueprint Requirements")
 st.write(
     """
     Which compliance-relevant information is already available in the inLUMEN

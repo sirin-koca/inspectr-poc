@@ -56,7 +56,7 @@
         "description": "Execute sector law, DPIA, and obligations checks",
         "parameters": {},
         "compliance_extensions": {
-          "has_logging": true
+          "has_logging": false
         }
       },
       {

@@ -4,16 +4,12 @@ import streamlit as st
 # MAIN
 # --------------------------------------------------
 
-st.title("InspectR")
-st.subheader("Proof of Concept - TK Use Case")
-
-st.markdown(
-    """
-    **InspectR investigates whether a static data-pipeline blueprint can be
-    inspected against machine-readable compliance requirements at design time.**
-    """
+st.title("InspectR - policy engine") 
+st.code("Proof of Concept - TK Use Case")
+st.image(
+    "images/main.png",
+    width=1000,
 )
-
 st.divider()
 
 # --------------------------------------------------
@@ -49,13 +45,3 @@ with col3:
         """
     )
 
-st.divider()
-
-st.markdown("### Core Investigation")
-
-st.info(
-    """
-    What compliance-relevant conclusions can InspectR reliably derive
-    from a static pipeline blueprint — and what information is missing?
-    """
-)

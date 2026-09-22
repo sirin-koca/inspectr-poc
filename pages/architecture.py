@@ -1,26 +1,16 @@
 import streamlit as st
 
-st.subheader("InspectR PoC Architecture")
+st.subheader("InspectR Architecture")
 
-st.write(
-    """
-    The architecture evaluates a pipeline blueprint
-    against a machine-readable Policy-as-Code ruleset derived from the
-    selected EU AI Act provisions.
-    """
-)
-
-st.caption(
-    "PoC scope: the JSON pipeline blueprint is evaluated directly. "
+st.warning(
+    "The PoC scope evaluates the JSON pipeline blueprint directly. "
     "No Intermediate Representation (IR) is implemented."
 )
 
-st.divider()
-
 st.image(
-    "images/arch.jpg",
-    caption="InspectR PoC Architecture",
-    width=400,
+    "images/arch-2.png",
+    caption="InspectR Architecture",
+    width=1100,
 )
 
 st.markdown(

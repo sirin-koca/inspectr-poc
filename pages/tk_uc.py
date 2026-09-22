@@ -3,8 +3,6 @@ import streamlit as st
 # TK COMPLIANCE FLOW
 # --------------------------------------------------
 st.markdown("### TK Compliance Flow")
-st.divider()
-
 st.write(
     """
     The Trondheim Kommune (TK) Use Case provides the application
@@ -13,17 +11,12 @@ st.write(
     that forms the basis for the pipeline blueprint used in this PoC.
     """
 )
-
 st.image(
     "images/tk-uc-pl.jpg",
     caption="Trondheim Kommune Compliance Flow",
-    width=500,
+    width=900,
 )
-
-
 st.divider()
-
-
 # --------------------------------------------------
 # INLUMEN PIPELINE BLUEPRINT
 # --------------------------------------------------
