@@ -1,0 +1,118 @@
+{
+  "schema_version": "inlumen.project@2",
+  "project": {
+    "name": "Trondheim Kommune MUNDAT Case",
+    "description": "Accurate 7-stage data-sharing compliance flow enriched with compliance metadata extensions.",
+    "exported_at": "2026-09-07T13:54:24.983Z"
+  },
+  "pipeline": {
+    "nodes": [
+      {
+        "id": "1",
+        "kind": "source",
+        "label": "tk_request_intake",
+        "description": "Intake of compliance request from Trondheim Kommune",
+        "parameters": {},
+        "compliance_extensions": {
+          "has_logging": true
+        }
+      },
+      {
+        "id": "2",
+        "kind": "task",
+        "label": "validate_request",
+        "description": "Check request structure and metadata completeness",
+        "parameters": {},
+        "compliance_extensions": {
+          "has_logging": true
+        }
+      },
+      {
+        "id": "3",
+        "kind": "task",
+        "label": "retrieve_relevant_data",
+        "description": "Find datasets needed for the request",
+        "parameters": {},
+        "compliance_extensions": {
+          "has_logging": true
+        }
+      },
+      {
+        "id": "4",
+        "kind": "task",
+        "label": "process_data_for_compliance",
+        "description": "Prepare data for legal checks",
+        "parameters": {},
+        "compliance_extensions": {
+          "has_logging": true
+        }
+      },
+      {
+        "id": "5",
+        "kind": "task",
+        "label": "run_compliance_checks",
+        "description": "Execute sector law, DPIA, and obligations checks",
+        "parameters": {},
+        "compliance_extensions": {
+          "has_logging": true,
+          "biometric_categorisation": true,
+          "uses_biometric_data": true,
+          "infers_sensitive_attributes": true
+        }
+      },
+      {
+        "id": "6",
+        "kind": "task",
+        "label": "prepare_sharing_decision",
+        "description": "Generate decision support (YES/NO)",
+        "parameters": {},
+        "compliance_extensions": {
+          "has_logging": true,
+          "social_scoring": false
+        }
+      },
+      {
+        "id": "7",
+        "kind": "destination",
+        "label": "tk_decision_output",
+        "description": "Output decision result for Trondheim Kommune compliance",
+        "parameters": {},
+        "compliance_extensions": {
+          "has_logging": true
+        }
+      }
+    ],
+    "connections": [
+      {
+        "id": "reactflow__edge-1-data-2-input",
+        "from": { "node": "1", "port": "data" },
+        "to": { "node": "2", "port": "input" }
+      },
+      {
+        "id": "reactflow__edge-2-output-3-input",
+        "from": { "node": "2", "port": "output" },
+        "to": { "node": "3", "port": "input" }
+      },
+      {
+        "id": "reactflow__edge-3-output-4-input",
+        "from": { "node": "3", "port": "output" },
+        "to": { "node": "4", "port": "input" }
+      },
+      {
+        "id": "reactflow__edge-4-output-5-input",
+        "from": { "node": "4", "port": "output" },
+        "to": { "node": "5", "port": "input" }
+      },
+      {
+        "id": "reactflow__edge-5-output-6-input",
+        "from": { "node": "5", "port": "output" },
+        "to": { "node": "6", "port": "input" }
+      },
+      {
+        "id": "reactflow__edge-6-output-7-data",
+        "from": { "node": "6", "port": "output" },
+        "to": { "node": "7", "port": "data" }
+      }
+    ]
+  }
+}
