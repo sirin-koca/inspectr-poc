@@ -366,3 +366,264 @@ These are not direct GDPR rules and not EU AI Act rules.
 
 They are local, technical Policy-as-Code rules derived from the TK/MUNDAT use case. The policy checks whether a blueprint contains selected evidence needed to support the TK data-sharing process.
 
+---
+
+Updated todo list
+
+## Current Rego Rules
+
+The current `policy.rego` implements five rules:
+
+| Rule | What it checks | Source of requirement |
+|---|---|---|
+| `TK-STRUCT-01` | Required TK stages and graph connections | TK/MUNDAT pipeline design |
+| `TK-DATA-01` | Source identifier and source approval | TK data-source and provenance needs |
+| `TK-TRACE-01` | Logging declaration on every stage | TK/MUNDAT traceability requirements |
+| `TK-RISK-01` | Presence of compliance/DPIA/risk-check stage | TK/MUNDAT compliance process |
+| `TK-HUMAN-01` | Human review before sharing | TK sharing and approval process |
+
+These are **not direct GDPR rules and not EU AI Act rules**.
+
+They are **local, technical Policy-as-Code rules derived from the TK/MUNDAT use case**. The policy checks whether a blueprint contains selected evidence needed to support the TK data-sharing process.
+
+## Why the AIA Rules Were Removed
+
+The TK use case is fundamentally about:
+
+- receiving municipal data-sharing requests;
+- finding relevant data;
+- processing and preparing datasets;
+- conducting compliance and risk checks;
+- deciding whether and how data can be shared.
+
+The blueprint does not currently establish that an AI system exists. The `prepare_sharing_decision` node is described as decision support, but it does not contain an ML, LLM, or other AI implementation.
+
+Therefore, applying rules such as:
+
+- EU AI Act Article 10;
+- EU AI Act Article 12;
+- EU AI Act Article 14;
+- Article 5 prohibited AI practices;
+
+would overstate what the blueprint demonstrates.
+
+The previous AIA rules were conceptually misaligned because they treated the TK pipeline as an AI Act system without sufficient evidence.
+
+## Rule Explanations
+
+### `TK-STRUCT-01`
+
+This rule requires the following stages:
+
+```text
+tk_request_intake
+ -> validate_request
+ -> retrieve_relevant_data
+ -> process_data_for_compliance
+ -> run_compliance_checks
+ -> prepare_sharing_decision
+ -> tk_decision_output
+```
+
+It checks:
+
+- all seven required nodes exist;
+- the node IDs can be resolved;
+- the six expected connections exist;
+- the graph represents the required flow.
+
+It intentionally checks graph connections instead of relying on the order of the JSON node array. JSON serialization order is not semantically meaningful.
+
+This rule comes directly from the TK pipeline abstraction created in inLUMEN.
+
+It is not a GDPR rule or an EU AI Act rule.
+
+### `TK-DATA-01`
+
+For each node with `kind: "source"`, the rule requires:
+
+```json
+"compliance_extensions": {
+  "source_id": "...",
+  "approved_source": true
+}
+```
+
+This represents the TK requirement that data sources should be identifiable, governed, and approved before being used.
+
+The rule is related to data governance and lawful data handling, but it does not implement GDPR Article 5, Article 6, or any other specific legal provision. It is a simplified engineering assumption for the PoC.
+
+It answers:
+
+> Does the blueprint identify where the data comes from, and does it declare that source as approved?
+
+It does not answer:
+
+- whether the legal basis is valid;
+- whether consent is required;
+- whether the data is actually lawful to use;
+- whether the source is legally authorized.
+
+### `TK-TRACE-01`
+
+This rule requires every pipeline node to contain:
+
+```json
+"has_logging": true
+```
+
+The purpose is to represent traceability across:
+
+- request intake;
+- data access;
+- processing;
+- compliance checks;
+- sharing decision;
+- output delivery.
+
+This requirement comes from the MUNDAT documentation, which identifies traceability, processing documentation, and auditability as important needs.
+
+It is related to GDPR accountability and documentation concerns, but it is not a complete implementation of GDPR requirements. It only checks that logging capability is declared in the blueprint.
+
+It does not verify that:
+
+- logs are actually generated;
+- logs contain the required information;
+- logs are retained;
+- logs are protected;
+- logging complies with data-protection rules.
+
+### `TK-RISK-01`
+
+This rule checks for the presence of a node labelled:
+
+```text
+run_compliance_checks
+```
+
+The TK/MUNDAT documents describe DPIA and risk assessment at multiple points:
+
+- early in the request process;
+- before extracting data;
+- after integrating data;
+- before sharing data.
+
+The current rule is intentionally narrower. It only checks that the simplified blueprint contains a dedicated compliance-check stage.
+
+It is conceptually related to GDPR DPIA and risk-management activities, but it does not implement a complete DPIA or GDPR risk assessment.
+
+It does not check:
+
+- the actual DPIA content;
+- identified risks;
+- mitigations;
+- residual risk;
+- approval by a Data Protection Officer;
+- whether assessment occurs at all required lifecycle points.
+
+### `TK-HUMAN-01`
+
+This rule checks the `prepare_sharing_decision` node.
+
+Possible results are:
+
+```text
+human_oversight: true
+    -> OK
+
+human_oversight: false
+    -> FAIL
+
+human_oversight missing
+    -> HUMAN
+```
+
+This was chosen because the TK documentation describes sharing as a controlled process involving responsible people and, in some cases, higher-level approval.
+
+The rule means:
+
+> The blueprint explicitly declares whether human review or override exists before data sharing.
+
+It does not mean that Article 14 of the EU AI Act is being implemented.
+
+It is a TK governance and approval rule. The terms “human review” and “human oversight” are technically useful here, but the current use case does not establish an AI-specific legal obligation.
+
+## Relationship to TK-UC
+
+The connection is:
+
+```text
+TK/MUNDAT business process
+        |
+        v
+Simplified inLUMEN pipeline
+        |
+        v
+Declared compliance metadata
+        |
+        v
+TK-specific Rego rules
+        |
+        v
+OK / FAIL / HUMAN
+```
+
+The seven pipeline nodes represent the simplified TK flow.
+
+The `compliance_extensions` fields add evidence that is not present in the original raw inLUMEN export:
+
+```json
+{
+  "has_logging": true,
+  "source_id": "tk_municipal_data_request",
+  "approved_source": true,
+  "human_oversight": false
+}
+```
+
+The policy evaluates those declared fields. It does not inspect runtime data or execute the pipeline.
+
+## What Is Actually Implemented
+
+Implemented:
+
+- structural validation of the TK pipeline;
+- validation of graph connections;
+- source provenance and approval metadata;
+- declared logging capability;
+- presence of a compliance/risk stage;
+- explicit human-review status;
+- machine-readable evidence, reasons, remedies, and statuses.
+
+Not implemented:
+
+- complete GDPR compliance;
+- complete EU AI Act compliance;
+- legal-basis validation;
+- consent management;
+- data minimization validation;
+- anonymization or pseudonymization validation;
+- access-control validation;
+- data-sharing contracts;
+- secure delivery validation;
+- actual DPIA evaluation;
+- runtime execution;
+- actual AI-system detection;
+- intermediate representation.
+
+## Final Classification
+
+The current Rego policy is best described as:
+
+> A TK/MUNDAT-specific design-time compliance and governance policy, inspired by documented GDPR-related and municipal data-sharing requirements, but not itself a formal GDPR or EU AI Act implementation.
+
+That scope is appropriate for the current PoC because it demonstrates the InspectR architecture:
+
+```text
+pipeline blueprint
++ declared evidence
++ independent OPA/Rego policy
+= explainable design-time findings
+```
+
+The policy should therefore be presented as an **operational prototype for TK data-sharing governance**, not as a legal compliance engine for GDPR or the EU AI Act.
