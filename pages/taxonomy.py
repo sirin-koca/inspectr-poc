@@ -1,9 +1,10 @@
-import plotly.express as px
-import streamlit as st
-
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+
+# --------------------------------------------------
+# PAGE CONFIGURATION
+# --------------------------------------------------
 
 st.set_page_config(page_title="InspectR Taxonomy Explorer", layout="wide")
 
@@ -83,8 +84,8 @@ parents = []
 levels = []
 descriptions = []
 colors = []
-articles = []
-links = []
+rule_ids = []
+evidence_fields = []
 
 
 def flatten_taxonomy(node, parent="", inherited_color="dodgerblue"):
@@ -96,8 +97,8 @@ def flatten_taxonomy(node, parent="", inherited_color="dodgerblue"):
     levels.append(node.get("level", ""))
     descriptions.append(node.get("description", ""))
     colors.append(current_color)
-    articles.append(node.get("ai_act_article", ""))
-    links.append(node.get("ai_act_link", ""))
+    rule_ids.append(node.get("rule_id", ""))
+    evidence_fields.append(", ".join(node.get("evidence_fields", [])))
 
     for child in node.get("children", []):
         flatten_taxonomy(
@@ -121,8 +122,8 @@ fig = px.icicle(
     custom_data=[
         levels,
         descriptions,
-        articles,
-        links,
+        rule_ids,
+        evidence_fields,
     ],
     title="InspectR PoC Taxonomy",
 )
@@ -134,7 +135,8 @@ fig.update_traces(
         "<b>%{label}</b><br><br>"
         "<b>Level:</b> %{customdata[0]}<br>"
         "<b>Description:</b> %{customdata[1]}<br>"
-        "<b>AIA provision:</b> %{customdata[2]}"
+        "<b>Rule:</b> %{customdata[2]}<br>"
+        "<b>Evidence:</b> %{customdata[3]}"
         "<extra></extra>"
     ),
     textinfo="label",

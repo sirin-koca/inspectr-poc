@@ -360,4 +360,9 @@ Streamlit evidence and remedy display
 
 It now evaluates the TK use-case structure and declared compliance evidence rather than presenting the TK use case as an EU AI Act evaluation.
 
+---
+
+These are not direct GDPR rules and not EU AI Act rules.
+
+They are local, technical Policy-as-Code rules derived from the TK/MUNDAT use case. The policy checks whether a blueprint contains selected evidence needed to support the TK data-sharing process.
 
