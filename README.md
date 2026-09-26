@@ -1,5 +1,6 @@
-# InspectR 
-_Proof of Concept (PoC)_
+# InspectR
+
+## Proof of Concept (PoC)
 
 **Compliance engine for data pipeline ecosystems**
 
@@ -7,12 +8,12 @@ InspectR is a research prototype for investigating how regulatory requirements c
 
 The current proof of concept uses the **Trondheim Kommune (TK) use case** and selected provisions of the **EU AI Act** to demonstrate the approach.
 
-## Core Architecture - two-input decision mechanism:
+## Core Architecture - two-input decision mechanism
 
 The pipeline provides facts/evidence, Rego defines the encoded compliance rules where policy provides the condition, and OPA evaluates the two.
 
-<img width="791" height="531" alt="image" src="https://github.com/user-attachments/assets/b5a0fdb4-8da4-4e42-b50c-b0fb126dc812" />
-<img width="796" height="286" alt="image" src="https://github.com/user-attachments/assets/f8edb06e-723b-495f-ab9b-33f7d579591d" />
+![Architecture diagram](https://github.com/user-attachments/assets/b5a0fdb4-8da4-4e42-b50c-b0fb126dc812)
+![Architecture diagram](https://github.com/user-attachments/assets/f8edb06e-723b-495f-ab9b-33f7d579591d)
 
 **System evidence ↔ Executable policy ↔ Independent decision engine**
 
