@@ -1,7 +1,7 @@
 # InspectR 
 _Proof of Concept (PoC)_
 
-**Design-time compliance inspection for data pipeline ecosystems**
+**Design-time compliance inspection engine for data pipeline ecosystems**
 
 InspectR is a research prototype for investigating how regulatory requirements can be operationalized as **Policy-as-Code (PaC)** and evaluated against data pipeline blueprints before deployment.
 
