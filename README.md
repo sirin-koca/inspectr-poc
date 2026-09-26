@@ -4,7 +4,7 @@ Proof of Concept (PoC)
 
 ### Compliance engine for data pipeline ecosystems
 
-InspectR is a research prototype for investigating how regulatory requirements can be operationalized as **Policy-as-Code (PaC)** and evaluated against data pipeline blueprints before deployment.
+InspectR is a research prototype for investigating how regulatory requirements can be operationalized as **Policy-as-Code (PaC)** decoupled from the application logic and evaluated against data pipeline blueprints before deployment.
 
 The current proof of concept uses the **Trondheim Kommune (TK) use case** and selected provisions of the **EU AI Act** to demonstrate the approach.
 
@@ -16,6 +16,8 @@ The pipeline provides facts/evidence, Rego defines the encoded compliance rules 
 ![Architecture diagram](https://github.com/user-attachments/assets/f8edb06e-723b-495f-ab9b-33f7d579591d)
 
 ### System evidence ↔ Executable policy ↔ Independent decision engine
+<img alt="image" src="https://github.com/user-attachments/assets/2dbd93ad-39a0-4823-8437-b8a6dc1e5143" />
+
 
 ## Repository Structure
 
