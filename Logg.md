@@ -362,14 +362,6 @@ It now evaluates the TK use-case structure and declared compliance evidence rath
 
 ---
 
-These are not direct GDPR rules and not EU AI Act rules.
-
-They are local, technical Policy-as-Code rules derived from the TK/MUNDAT use case. The policy checks whether a blueprint contains selected evidence needed to support the TK data-sharing process.
-
----
-
-Updated todo list
-
 ## Current Rego Rules
 
 The current `policy.rego` implements five rules:
@@ -381,6 +373,7 @@ The current `policy.rego` implements five rules:
 | `TK-TRACE-01` | Logging declaration on every stage | TK/MUNDAT traceability requirements |
 | `TK-RISK-01` | Presence of compliance/DPIA/risk-check stage | TK/MUNDAT compliance process |
 | `TK-HUMAN-01` | Human review before sharing | TK sharing and approval process |
+
 
 These are **not direct GDPR rules and not EU AI Act rules**.
 
