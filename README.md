@@ -1,6 +1,6 @@
 # InspectR
 
-## Proof of Concept (PoC)
+Proof of Concept (PoC)
 
 ### Compliance engine for data pipeline ecosystems
 
