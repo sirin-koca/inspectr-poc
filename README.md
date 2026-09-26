@@ -66,3 +66,7 @@ InspectR is developed as part of an MSc thesis at the University of Oslo in coll
 **Thesis:** *Architecting a Compliance Engine for Multi-Agent Data Pipeline Ecosystems*
 
 > Research prototype — work in progress.
+
+---
+
+sirin-koca

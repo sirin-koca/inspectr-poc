@@ -1,16 +1,12 @@
 import streamlit as st
 
-st.subheader("Policy-as-Code Framework")
-
-st.markdown("""
-### From regulation to executable inspection
-
-InspectR uses **Policy-as-Code (PaC)** to represent selected compliance
-requirements as rules that software can evaluate.
-
-**Rego** is the policy language used to write these rules.  
-**Open Policy Agent (OPA)** is the engine that executes them.
-""")
+st.subheader("Policy-as-Code - PaC Framework")
+st.markdown(
+    """
+    PaC is a software engineering approach to compliance that represents regulatory requirements as machine-readable rules.
+    PaC uses Open Policy Agent (OPA) and its query language, Rego, **decouples policy decision-making from application logic** 
+    and infrastructure enforcement to automate compliance checks.
+    """)
 
 st.divider()
 

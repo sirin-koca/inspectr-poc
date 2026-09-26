@@ -4,8 +4,8 @@ import streamlit as st
 # MAIN
 # --------------------------------------------------
 
-st.title("InspectR - policy engine") 
-st.code("Proof of Concept - TK Use Case")
+st.title("InspectR - compliance engine") 
+st.code("🟦🟩 Proof of Concept - TK Use Case")
 st.image(
     "images/main.png",
     width=1000,
