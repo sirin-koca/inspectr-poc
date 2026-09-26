@@ -1,46 +1,20 @@
 # InspectR 
 _Proof of Concept (PoC)_
 
-**Design-time compliance inspection engine for data pipeline ecosystems**
+**Compliance engine for data pipeline ecosystems**
 
 InspectR is a research prototype for investigating how regulatory requirements can be operationalized as **Policy-as-Code (PaC)** and evaluated against data pipeline blueprints before deployment.
 
 The current proof of concept uses the **Trondheim Kommune (TK) use case** and selected provisions of the **EU AI Act** to demonstrate the approach.
 
-## Core Architecture
+## Core Architecture - two-input decision mechanism:
 
-```text
-Pipeline Blueprint (JSON)
-          │
-          ▼
-       InspectR
-          │
-          ▼
- Policy-as-Code (Rego)
-          │
-          ▼
- Open Policy Agent (OPA)
-          │
-          ▼
-   Compliance Findings
-   OK / FAIL / HUMAN
-```
+The pipeline provides facts/evidence, Rego defines the encoded compliance rules where policy provides the condition, and OPA evaluates the two.
+
+<img width="791" height="531" alt="image" src="https://github.com/user-attachments/assets/b5a0fdb4-8da4-4e42-b50c-b0fb126dc812" />
+<img width="796" height="286" alt="image" src="https://github.com/user-attachments/assets/f8edb06e-723b-495f-ab9b-33f7d579591d" />
 
 **System evidence ↔ Executable policy ↔ Independent decision engine**
-
-The pipeline blueprint provides evidence. Rego defines the encoded compliance rules. OPA evaluates the evidence against those rules. InspectR presents the resulting findings.
-
-## Current PoC
-
-The current implementation demonstrates:
-
-- design-time inspection of an inLUMEN/TK pipeline blueprint
-- compliance rules externalized as Rego policies
-- policy evaluation using Open Policy Agent
-- structured `OK`, `FAIL`, and `HUMAN` outcomes
-- evidence, reasoning, legal references, and remediation guidance
-
-The current AI Act subset is **provisional** and used to demonstrate the technical mechanism. It does not establish legal compliance.
 
 ## Repository Structure
 
@@ -48,7 +22,7 @@ The current AI Act subset is **provisional** and used to demonstrate the technic
 inspectr-poc/
 ├── app.py          # Streamlit application
 ├── data/           # Pipeline blueprints and supporting data
-├── pages/          # InspectR interface
+├── pages/          # InspectR interface and subpages, taxonomy
 ├── policies/       # Rego Policy-as-Code rules
 ├── src/            # Evaluation/integration logic
 ├── images/         # UI and project assets
@@ -57,7 +31,7 @@ inspectr-poc/
 
 ## Technology
 
-`Python` · `Streamlit` · `Open Policy Agent (OPA)` · `Rego` · `JSON`
+`Python` · `JSON` · `PaC` · `Open Policy Agent (OPA)` · `Rego` · `inLUMEN`
 
 ## Research Context
 
