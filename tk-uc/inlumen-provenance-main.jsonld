@@ -1,0 +1,1014 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "prov": "http://www.w3.org/ns/prov#",
+    "inlumen": "urn:inlumen:prov:",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "label": "rdfs:label",
+    "generatedAtTime": {
+      "@id": "prov:generatedAtTime",
+      "@type": "xsd:dateTime"
+    },
+    "startedAtTime": {
+      "@id": "prov:startedAtTime",
+      "@type": "xsd:dateTime"
+    },
+    "endedAtTime": {
+      "@id": "prov:endedAtTime",
+      "@type": "xsd:dateTime"
+    },
+    "used": {
+      "@id": "prov:used",
+      "@type": "@id"
+    },
+    "wasGeneratedBy": {
+      "@id": "prov:wasGeneratedBy",
+      "@type": "@id"
+    },
+    "wasAssociatedWith": {
+      "@id": "prov:wasAssociatedWith",
+      "@type": "@id"
+    },
+    "wasAttributedTo": {
+      "@id": "prov:wasAttributedTo",
+      "@type": "@id"
+    },
+    "wasRevisionOf": {
+      "@id": "prov:wasRevisionOf",
+      "@type": "@id"
+    },
+    "specializationOf": {
+      "@id": "prov:specializationOf",
+      "@type": "@id"
+    },
+    "actedOnBehalfOf": {
+      "@id": "prov:actedOnBehalfOf",
+      "@type": "@id"
+    },
+    "value": "prov:value",
+    "action": "inlumen:action",
+    "summary": "inlumen:summary",
+    "details": {
+      "@id": "inlumen:details",
+      "@type": "@json"
+    },
+    "sessionId": "inlumen:sessionId",
+    "versionUid": "inlumen:versionUid",
+    "historyDirection": "inlumen:historyDirection",
+    "sourceSnapshotFingerprint": "inlumen:sourceSnapshotFingerprint",
+    "targetSnapshotFingerprint": "inlumen:targetSnapshotFingerprint",
+    "updatedAt": {
+      "@id": "inlumen:updatedAt",
+      "@type": "xsd:dateTime"
+    }
+  },
+  "@id": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main",
+  "@type": "prov:Bundle",
+  "label": "inLUMEN provenance for Main",
+  "generatedAtTime": "2026-09-07T13:58:17Z",
+  "@graph": [
+    {
+      "@id": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100",
+      "@type": [
+        "prov:Entity",
+        "inlumen:Pipeline"
+      ],
+      "label": "Trondheim Kommune Compliance Flow",
+      "generatedAtTime": "2026-09-07T13:26:13.373Z",
+      "updatedAt": "2026-09-07T13:39:03.587Z"
+    },
+    {
+      "@id": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:initial",
+      "@type": [
+        "prov:Entity",
+        "inlumen:PipelineState"
+      ],
+      "label": "Main initial state",
+      "specializationOf": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100",
+      "generatedAtTime": "2026-09-07T13:26:28.71Z"
+    },
+    {
+      "@id": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:query:ba0203db-0889-4acf-85a0-ea98781bf914",
+      "@type": [
+        "prov:Entity",
+        "inlumen:UserQuery"
+      ],
+      "label": "User query",
+      "value": "Design a pipeline that models the Trondheim Kommune compliance flow.\n\nPipeline requirements:\n- Source node: tk_request_intake\n- Task node: validate_request (check structure, metadata completeness)\n- Task node: retrieve_relevant_data (find datasets needed for the request)\n- Task node: process_data_for_compliance (prepare data for legal checks)\n- Task node: run_compliance_checks (sector law, DPIA, obligations)\n- Task node: prepare_sharing_decision (YES/NO decision support)\n- Destination node: tk_decision_output\n\nConnect nodes in a linear sequence.\nKeep the pipeline minimal and aligned with the compliance flow in the diagram.",
+      "wasAttributedTo": "urn:inlumen:provenance:agent:operator"
+    },
+    {
+      "@id": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:activity:ba0203db-0889-4acf-85a0-ea98781bf914",
+      "@type": [
+        "prov:Activity",
+        "inlumen:PipelineModification"
+      ],
+      "label": "Agent executed pipeline operation 'create_pipeline'.",
+      "action": "create_pipeline",
+      "summary": "Agent executed pipeline operation 'create_pipeline'.",
+      "used": [
+        "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:initial",
+        "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:query:ba0203db-0889-4acf-85a0-ea98781bf914"
+      ],
+      "wasAssociatedWith": "urn:inlumen:provenance:agent:agent",
+      "versionUid": "main",
+      "sessionId": "31d2bffe-c372-4dc6-bc22-4fc2068bc8b9",
+      "details": {
+        "graph_snapshot": {
+          "edge_count": 0,
+          "edges": [],
+          "node_count": 0,
+          "nodes": [],
+          "truncated": false
+        },
+        "query_type": "create_pipeline",
+        "result": "[{'pipeline': {'active_version_name': 'Main', 'active_version_description': 'Models compliance request processing from intake through decision output', 'created': False, 'description': 'Models compliance request processing from intake through decision output', 'created_at': '2026-09-07T13:26:13.373Z', 'label': 'Trondheim Kommune Compliance Flow', 'version': 'Main', 'active_version_uid': 'main', 'uid': '30e9dcaa-f44b-48c1-ac44-18338865d100', 'updated_at': '2026-09-07T13:26:28.71Z', 'name': 'Trondheim Kommune Compliance Flow', 'design_pipeline_count': 1, 'status': 'design'}}]",
+        "session_id": "31d2bffe-c372-4dc6-bc22-4fc2068bc8b9",
+        "user_query": "Design a pipeline that models the Trondheim Kommune compliance flow.\n\nPipeline requirements:\n- Source node: tk_request_intake\n- Task node: validate_request (check structure, metadata completeness)\n- Task node: retrieve_relevant_data (find datasets needed for the request)\n- Task node: process_data_for_compliance (prepare data for legal checks)\n- Task node: run_compliance_checks (sector law, DPIA, obligations)\n- Task node: prepare_sharing_decision (YES/NO decision support)\n- Destination node: tk_decision_output\n\nConnect nodes in a linear sequence.\nKeep the pipeline minimal and aligned with the compliance flow in the diagram."
+      },
+      "startedAtTime": "2026-09-07T13:26:30.458Z",
+      "endedAtTime": "2026-09-07T13:26:30.458Z"
+    },
+    {
+      "@id": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:ba0203db-0889-4acf-85a0-ea98781bf914",
+      "@type": [
+        "prov:Entity",
+        "inlumen:PipelineState"
+      ],
+      "label": "Main state 1",
+      "specializationOf": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100",
+      "wasGeneratedBy": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:activity:ba0203db-0889-4acf-85a0-ea98781bf914",
+      "wasRevisionOf": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:initial",
+      "generatedAtTime": "2026-09-07T13:26:30.458Z"
+    },
+    {
+      "@id": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:query:5ff2a6ea-9b54-4761-9310-dae6ae31e1e9",
+      "@type": [
+        "prov:Entity",
+        "inlumen:UserQuery"
+      ],
+      "label": "User query",
+      "value": "Design a pipeline that models the Trondheim Kommune compliance flow.\n\nPipeline requirements:\n- Source node: tk_request_intake\n- Task node: validate_request (check structure, metadata completeness)\n- Task node: retrieve_relevant_data (find datasets needed for the request)\n- Task node: process_data_for_compliance (prepare data for legal checks)\n- Task node: run_compliance_checks (sector law, DPIA, obligations)\n- Task node: prepare_sharing_decision (YES/NO decision support)\n- Destination node: tk_decision_output\n\nConnect nodes in a linear sequence.\nKeep the pipeline minimal and aligned with the compliance flow in the diagram.",
+      "wasAttributedTo": "urn:inlumen:provenance:agent:operator"
+    },
+    {
+      "@id": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:activity:5ff2a6ea-9b54-4761-9310-dae6ae31e1e9",
+      "@type": [
+        "prov:Activity",
+        "inlumen:PipelineModification"
+      ],
+      "label": "Agent executed pipeline operation 'create_step'.",
+      "action": "create_step",
+      "summary": "Agent executed pipeline operation 'create_step'.",
+      "used": [
+        "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:ba0203db-0889-4acf-85a0-ea98781bf914",
+        "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:query:5ff2a6ea-9b54-4761-9310-dae6ae31e1e9"
+      ],
+      "wasAssociatedWith": "urn:inlumen:provenance:agent:agent",
+      "versionUid": "main",
+      "sessionId": "31d2bffe-c372-4dc6-bc22-4fc2068bc8b9",
+      "details": {
+        "graph_snapshot": {
+          "edge_count": 0,
+          "edges": [],
+          "node_count": 1,
+          "nodes": [
+            {
+              "id": "1",
+              "label": "tk_request_intake",
+              "type": "source",
+              "x": 0.0,
+              "y": 0.0
+            }
+          ],
+          "truncated": false
+        },
+        "query_type": "create_step",
+        "result": "[{'step': {'uid': '9839e947-b56b-4166-86b1-8eaee61bedd3', 'flow_id': '1', 'x': 0.0, 'y': 0.0, 'description': 'Intake of compliance request from Trondheim Kommune', 'label': 'tk_request_intake', 'type': 'source', 'pipeline_updated_at': '2026-09-07T13:26:36.562Z'}}]",
+        "session_id": "31d2bffe-c372-4dc6-bc22-4fc2068bc8b9",
+        "user_query": "Design a pipeline that models the Trondheim Kommune compliance flow.\n\nPipeline requirements:\n- Source node: tk_request_intake\n- Task node: validate_request (check structure, metadata completeness)\n- Task node: retrieve_relevant_data (find datasets needed for the request)\n- Task node: process_data_for_compliance (prepare data for legal checks)\n- Task node: run_compliance_checks (sector law, DPIA, obligations)\n- Task node: prepare_sharing_decision (YES/NO decision support)\n- Destination node: tk_decision_output\n\nConnect nodes in a linear sequence.\nKeep the pipeline minimal and aligned with the compliance flow in the diagram."
+      },
+      "startedAtTime": "2026-09-07T13:26:38.114Z",
+      "endedAtTime": "2026-09-07T13:26:38.114Z"
+    },
+    {
+      "@id": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:5ff2a6ea-9b54-4761-9310-dae6ae31e1e9",
+      "@type": [
+        "prov:Entity",
+        "inlumen:PipelineState"
+      ],
+      "label": "Main state 2",
+      "specializationOf": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100",
+      "wasGeneratedBy": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:activity:5ff2a6ea-9b54-4761-9310-dae6ae31e1e9",
+      "wasRevisionOf": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:ba0203db-0889-4acf-85a0-ea98781bf914",
+      "generatedAtTime": "2026-09-07T13:26:38.114Z"
+    },
+    {
+      "@id": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:query:b0bc9fa6-c6f3-403d-8fcf-aafb67d46c82",
+      "@type": [
+        "prov:Entity",
+        "inlumen:UserQuery"
+      ],
+      "label": "User query",
+      "value": "Design a pipeline that models the Trondheim Kommune compliance flow.\n\nPipeline requirements:\n- Source node: tk_request_intake\n- Task node: validate_request (check structure, metadata completeness)\n- Task node: retrieve_relevant_data (find datasets needed for the request)\n- Task node: process_data_for_compliance (prepare data for legal checks)\n- Task node: run_compliance_checks (sector law, DPIA, obligations)\n- Task node: prepare_sharing_decision (YES/NO decision support)\n- Destination node: tk_decision_output\n\nConnect nodes in a linear sequence.\nKeep the pipeline minimal and aligned with the compliance flow in the diagram.",
+      "wasAttributedTo": "urn:inlumen:provenance:agent:operator"
+    },
+    {
+      "@id": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:activity:b0bc9fa6-c6f3-403d-8fcf-aafb67d46c82",
+      "@type": [
+        "prov:Activity",
+        "inlumen:PipelineModification"
+      ],
+      "label": "Agent executed pipeline operation 'create_step'.",
+      "action": "create_step",
+      "summary": "Agent executed pipeline operation 'create_step'.",
+      "used": [
+        "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:5ff2a6ea-9b54-4761-9310-dae6ae31e1e9",
+        "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:query:b0bc9fa6-c6f3-403d-8fcf-aafb67d46c82"
+      ],
+      "wasAssociatedWith": "urn:inlumen:provenance:agent:agent",
+      "versionUid": "main",
+      "sessionId": "31d2bffe-c372-4dc6-bc22-4fc2068bc8b9",
+      "details": {
+        "graph_snapshot": {
+          "edge_count": 1,
+          "edges": [
+            {
+              "source": "1",
+              "source_port": "data",
+              "target": "2",
+              "target_port": "input"
+            }
+          ],
+          "node_count": 2,
+          "nodes": [
+            {
+              "id": "1",
+              "label": "tk_request_intake",
+              "type": "source",
+              "x": 0.0,
+              "y": 0.0
+            },
+            {
+              "id": "2",
+              "label": "validate_request",
+              "type": "task",
+              "x": 300.0,
+              "y": 0.0
+            }
+          ],
+          "truncated": false
+        },
+        "query_type": "create_step",
+        "result": "[{'step': {'uid': 'ab70089f-b4b4-48a4-bef5-8fdae032d6e1', 'flow_id': '2', 'x': 300.0, 'y': 0.0, 'description': 'Check request structure and metadata completeness', 'label': 'validate_request', 'type': 'task', 'pipeline_updated_at': '2026-09-07T13:26:40.732Z'}}]",
+        "session_id": "31d2bffe-c372-4dc6-bc22-4fc2068bc8b9",
+        "user_query": "Design a pipeline that models the Trondheim Kommune compliance flow.\n\nPipeline requirements:\n- Source node: tk_request_intake\n- Task node: validate_request (check structure, metadata completeness)\n- Task node: retrieve_relevant_data (find datasets needed for the request)\n- Task node: process_data_for_compliance (prepare data for legal checks)\n- Task node: run_compliance_checks (sector law, DPIA, obligations)\n- Task node: prepare_sharing_decision (YES/NO decision support)\n- Destination node: tk_decision_output\n\nConnect nodes in a linear sequence.\nKeep the pipeline minimal and aligned with the compliance flow in the diagram."
+      },
+      "startedAtTime": "2026-09-07T13:26:49.951Z",
+      "endedAtTime": "2026-09-07T13:26:49.951Z"
+    },
+    {
+      "@id": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:b0bc9fa6-c6f3-403d-8fcf-aafb67d46c82",
+      "@type": [
+        "prov:Entity",
+        "inlumen:PipelineState"
+      ],
+      "label": "Main state 3",
+      "specializationOf": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100",
+      "wasGeneratedBy": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:activity:b0bc9fa6-c6f3-403d-8fcf-aafb67d46c82",
+      "wasRevisionOf": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:5ff2a6ea-9b54-4761-9310-dae6ae31e1e9",
+      "generatedAtTime": "2026-09-07T13:26:49.951Z"
+    },
+    {
+      "@id": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:query:32bb798c-f8d8-4071-837b-a9d38f61a9cd",
+      "@type": [
+        "prov:Entity",
+        "inlumen:UserQuery"
+      ],
+      "label": "User query",
+      "value": "Design a pipeline that models the Trondheim Kommune compliance flow.\n\nPipeline requirements:\n- Source node: tk_request_intake\n- Task node: validate_request (check structure, metadata completeness)\n- Task node: retrieve_relevant_data (find datasets needed for the request)\n- Task node: process_data_for_compliance (prepare data for legal checks)\n- Task node: run_compliance_checks (sector law, DPIA, obligations)\n- Task node: prepare_sharing_decision (YES/NO decision support)\n- Destination node: tk_decision_output\n\nConnect nodes in a linear sequence.\nKeep the pipeline minimal and aligned with the compliance flow in the diagram.",
+      "wasAttributedTo": "urn:inlumen:provenance:agent:operator"
+    },
+    {
+      "@id": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:activity:32bb798c-f8d8-4071-837b-a9d38f61a9cd",
+      "@type": [
+        "prov:Activity",
+        "inlumen:PipelineModification"
+      ],
+      "label": "Agent executed pipeline operation 'create_step'.",
+      "action": "create_step",
+      "summary": "Agent executed pipeline operation 'create_step'.",
+      "used": [
+        "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:b0bc9fa6-c6f3-403d-8fcf-aafb67d46c82",
+        "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:query:32bb798c-f8d8-4071-837b-a9d38f61a9cd"
+      ],
+      "wasAssociatedWith": "urn:inlumen:provenance:agent:agent",
+      "versionUid": "main",
+      "sessionId": "31d2bffe-c372-4dc6-bc22-4fc2068bc8b9",
+      "details": {
+        "graph_snapshot": {
+          "edge_count": 2,
+          "edges": [
+            {
+              "source": "1",
+              "source_port": "data",
+              "target": "2",
+              "target_port": "input"
+            },
+            {
+              "source": "2",
+              "source_port": "output",
+              "target": "3",
+              "target_port": "input"
+            }
+          ],
+          "node_count": 3,
+          "nodes": [
+            {
+              "id": "1",
+              "label": "tk_request_intake",
+              "type": "source",
+              "x": 0.0,
+              "y": 0.0
+            },
+            {
+              "id": "2",
+              "label": "validate_request",
+              "type": "task",
+              "x": 300.0,
+              "y": 0.0
+            },
+            {
+              "id": "3",
+              "label": "retrieve_relevant_data",
+              "type": "task",
+              "x": 600.0,
+              "y": 0.0
+            }
+          ],
+          "truncated": false
+        },
+        "query_type": "create_step",
+        "result": "[{'step': {'target_port': 'input', 'uid': 'd9e869e8-f628-4ea9-a65b-1f3fbdc5ee16', 'after_flow_id': '2', 'flow_id': '3', 'source_port': 'output', 'x': 600.0, 'y': 0.0, 'description': 'Find datasets needed for the request', 'label': 'retrieve_relevant_data', 'type': 'task', 'pipeline_updated_at': '2026-09-07T13:26:56.971Z'}}]",
+        "session_id": "31d2bffe-c372-4dc6-bc22-4fc2068bc8b9",
+        "user_query": "Design a pipeline that models the Trondheim Kommune compliance flow.\n\nPipeline requirements:\n- Source node: tk_request_intake\n- Task node: validate_request (check structure, metadata completeness)\n- Task node: retrieve_relevant_data (find datasets needed for the request)\n- Task node: process_data_for_compliance (prepare data for legal checks)\n- Task node: run_compliance_checks (sector law, DPIA, obligations)\n- Task node: prepare_sharing_decision (YES/NO decision support)\n- Destination node: tk_decision_output\n\nConnect nodes in a linear sequence.\nKeep the pipeline minimal and aligned with the compliance flow in the diagram."
+      },
+      "startedAtTime": "2026-09-07T13:26:57.641Z",
+      "endedAtTime": "2026-09-07T13:26:57.641Z"
+    },
+    {
+      "@id": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:32bb798c-f8d8-4071-837b-a9d38f61a9cd",
+      "@type": [
+        "prov:Entity",
+        "inlumen:PipelineState"
+      ],
+      "label": "Main state 4",
+      "specializationOf": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100",
+      "wasGeneratedBy": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:activity:32bb798c-f8d8-4071-837b-a9d38f61a9cd",
+      "wasRevisionOf": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:b0bc9fa6-c6f3-403d-8fcf-aafb67d46c82",
+      "generatedAtTime": "2026-09-07T13:26:57.641Z"
+    },
+    {
+      "@id": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:query:5d2d1737-d4a2-4260-8000-9d7b05220541",
+      "@type": [
+        "prov:Entity",
+        "inlumen:UserQuery"
+      ],
+      "label": "User query",
+      "value": "Design a pipeline that models the Trondheim Kommune compliance flow.\n\nPipeline requirements:\n- Source node: tk_request_intake\n- Task node: validate_request (check structure, metadata completeness)\n- Task node: retrieve_relevant_data (find datasets needed for the request)\n- Task node: process_data_for_compliance (prepare data for legal checks)\n- Task node: run_compliance_checks (sector law, DPIA, obligations)\n- Task node: prepare_sharing_decision (YES/NO decision support)\n- Destination node: tk_decision_output\n\nConnect nodes in a linear sequence.\nKeep the pipeline minimal and aligned with the compliance flow in the diagram.",
+      "wasAttributedTo": "urn:inlumen:provenance:agent:operator"
+    },
+    {
+      "@id": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:activity:5d2d1737-d4a2-4260-8000-9d7b05220541",
+      "@type": [
+        "prov:Activity",
+        "inlumen:PipelineModification"
+      ],
+      "label": "Agent executed pipeline operation 'create_step'.",
+      "action": "create_step",
+      "summary": "Agent executed pipeline operation 'create_step'.",
+      "used": [
+        "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:32bb798c-f8d8-4071-837b-a9d38f61a9cd",
+        "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:query:5d2d1737-d4a2-4260-8000-9d7b05220541"
+      ],
+      "wasAssociatedWith": "urn:inlumen:provenance:agent:agent",
+      "versionUid": "main",
+      "sessionId": "31d2bffe-c372-4dc6-bc22-4fc2068bc8b9",
+      "details": {
+        "graph_snapshot": {
+          "edge_count": 3,
+          "edges": [
+            {
+              "source": "1",
+              "source_port": "data",
+              "target": "2",
+              "target_port": "input"
+            },
+            {
+              "source": "2",
+              "source_port": "output",
+              "target": "3",
+              "target_port": "input"
+            },
+            {
+              "source": "3",
+              "source_port": "output",
+              "target": "4",
+              "target_port": "input"
+            }
+          ],
+          "node_count": 4,
+          "nodes": [
+            {
+              "id": "1",
+              "label": "tk_request_intake",
+              "type": "source",
+              "x": 0.0,
+              "y": 0.0
+            },
+            {
+              "id": "2",
+              "label": "validate_request",
+              "type": "task",
+              "x": 300.0,
+              "y": 0.0
+            },
+            {
+              "id": "3",
+              "label": "retrieve_relevant_data",
+              "type": "task",
+              "x": 600.0,
+              "y": 0.0
+            },
+            {
+              "id": "4",
+              "label": "process_data_for_compliance",
+              "type": "task",
+              "x": 900.0,
+              "y": 0.0
+            }
+          ],
+          "truncated": false
+        },
+        "query_type": "create_step",
+        "result": "[{'step': {'target_port': 'input', 'uid': 'af2aa12c-c2c2-4aab-8afe-17a679aeafc2', 'after_flow_id': '3', 'flow_id': '4', 'source_port': 'output', 'x': 900.0, 'y': 0.0, 'description': 'Prepare data for legal checks', 'label': 'process_data_for_compliance', 'type': 'task', 'pipeline_updated_at': '2026-09-07T13:26:58.966Z'}}]",
+        "session_id": "31d2bffe-c372-4dc6-bc22-4fc2068bc8b9",
+        "user_query": "Design a pipeline that models the Trondheim Kommune compliance flow.\n\nPipeline requirements:\n- Source node: tk_request_intake\n- Task node: validate_request (check structure, metadata completeness)\n- Task node: retrieve_relevant_data (find datasets needed for the request)\n- Task node: process_data_for_compliance (prepare data for legal checks)\n- Task node: run_compliance_checks (sector law, DPIA, obligations)\n- Task node: prepare_sharing_decision (YES/NO decision support)\n- Destination node: tk_decision_output\n\nConnect nodes in a linear sequence.\nKeep the pipeline minimal and aligned with the compliance flow in the diagram."
+      },
+      "startedAtTime": "2026-09-07T13:26:59.47Z",
+      "endedAtTime": "2026-09-07T13:26:59.47Z"
+    },
+    {
+      "@id": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:5d2d1737-d4a2-4260-8000-9d7b05220541",
+      "@type": [
+        "prov:Entity",
+        "inlumen:PipelineState"
+      ],
+      "label": "Main state 5",
+      "specializationOf": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100",
+      "wasGeneratedBy": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:activity:5d2d1737-d4a2-4260-8000-9d7b05220541",
+      "wasRevisionOf": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:32bb798c-f8d8-4071-837b-a9d38f61a9cd",
+      "generatedAtTime": "2026-09-07T13:26:59.47Z"
+    },
+    {
+      "@id": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:query:458ab263-4632-4a15-9847-fb5f3884d8b6",
+      "@type": [
+        "prov:Entity",
+        "inlumen:UserQuery"
+      ],
+      "label": "User query",
+      "value": "Design a pipeline that models the Trondheim Kommune compliance flow.\n\nPipeline requirements:\n- Source node: tk_request_intake\n- Task node: validate_request (check structure, metadata completeness)\n- Task node: retrieve_relevant_data (find datasets needed for the request)\n- Task node: process_data_for_compliance (prepare data for legal checks)\n- Task node: run_compliance_checks (sector law, DPIA, obligations)\n- Task node: prepare_sharing_decision (YES/NO decision support)\n- Destination node: tk_decision_output\n\nConnect nodes in a linear sequence.\nKeep the pipeline minimal and aligned with the compliance flow in the diagram.",
+      "wasAttributedTo": "urn:inlumen:provenance:agent:operator"
+    },
+    {
+      "@id": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:activity:458ab263-4632-4a15-9847-fb5f3884d8b6",
+      "@type": [
+        "prov:Activity",
+        "inlumen:PipelineModification"
+      ],
+      "label": "Agent executed pipeline operation 'create_step'.",
+      "action": "create_step",
+      "summary": "Agent executed pipeline operation 'create_step'.",
+      "used": [
+        "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:5d2d1737-d4a2-4260-8000-9d7b05220541",
+        "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:query:458ab263-4632-4a15-9847-fb5f3884d8b6"
+      ],
+      "wasAssociatedWith": "urn:inlumen:provenance:agent:agent",
+      "versionUid": "main",
+      "sessionId": "31d2bffe-c372-4dc6-bc22-4fc2068bc8b9",
+      "details": {
+        "graph_snapshot": {
+          "edge_count": 4,
+          "edges": [
+            {
+              "source": "1",
+              "source_port": "data",
+              "target": "2",
+              "target_port": "input"
+            },
+            {
+              "source": "2",
+              "source_port": "output",
+              "target": "3",
+              "target_port": "input"
+            },
+            {
+              "source": "3",
+              "source_port": "output",
+              "target": "4",
+              "target_port": "input"
+            },
+            {
+              "source": "4",
+              "source_port": "output",
+              "target": "5",
+              "target_port": "input"
+            }
+          ],
+          "node_count": 5,
+          "nodes": [
+            {
+              "id": "1",
+              "label": "tk_request_intake",
+              "type": "source",
+              "x": 0.0,
+              "y": 0.0
+            },
+            {
+              "id": "2",
+              "label": "validate_request",
+              "type": "task",
+              "x": 300.0,
+              "y": 0.0
+            },
+            {
+              "id": "3",
+              "label": "retrieve_relevant_data",
+              "type": "task",
+              "x": 600.0,
+              "y": 0.0
+            },
+            {
+              "id": "4",
+              "label": "process_data_for_compliance",
+              "type": "task",
+              "x": 900.0,
+              "y": 0.0
+            },
+            {
+              "id": "5",
+              "label": "run_compliance_checks",
+              "type": "task",
+              "x": 1200.0,
+              "y": 0.0
+            }
+          ],
+          "truncated": false
+        },
+        "query_type": "create_step",
+        "result": "[{'step': {'target_port': 'input', 'uid': 'd97755cd-ef9f-49e9-a3be-d53d1aa9d360', 'after_flow_id': '4', 'flow_id': '5', 'source_port': 'output', 'x': 1200.0, 'y': 0.0, 'description': 'Execute sector law, DPIA, and obligations checks', 'label': 'run_compliance_checks', 'type': 'task', 'pipeline_updated_at': '2026-09-07T13:27:04.773Z'}}]",
+        "session_id": "31d2bffe-c372-4dc6-bc22-4fc2068bc8b9",
+        "user_query": "Design a pipeline that models the Trondheim Kommune compliance flow.\n\nPipeline requirements:\n- Source node: tk_request_intake\n- Task node: validate_request (check structure, metadata completeness)\n- Task node: retrieve_relevant_data (find datasets needed for the request)\n- Task node: process_data_for_compliance (prepare data for legal checks)\n- Task node: run_compliance_checks (sector law, DPIA, obligations)\n- Task node: prepare_sharing_decision (YES/NO decision support)\n- Destination node: tk_decision_output\n\nConnect nodes in a linear sequence.\nKeep the pipeline minimal and aligned with the compliance flow in the diagram."
+      },
+      "startedAtTime": "2026-09-07T13:27:05.534Z",
+      "endedAtTime": "2026-09-07T13:27:05.534Z"
+    },
+    {
+      "@id": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:458ab263-4632-4a15-9847-fb5f3884d8b6",
+      "@type": [
+        "prov:Entity",
+        "inlumen:PipelineState"
+      ],
+      "label": "Main state 6",
+      "specializationOf": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100",
+      "wasGeneratedBy": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:activity:458ab263-4632-4a15-9847-fb5f3884d8b6",
+      "wasRevisionOf": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:5d2d1737-d4a2-4260-8000-9d7b05220541",
+      "generatedAtTime": "2026-09-07T13:27:05.534Z"
+    },
+    {
+      "@id": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:query:7cfde617-9a07-4522-a6cd-02f4ca6347ca",
+      "@type": [
+        "prov:Entity",
+        "inlumen:UserQuery"
+      ],
+      "label": "User query",
+      "value": "Design a pipeline that models the Trondheim Kommune compliance flow.\n\nPipeline requirements:\n- Source node: tk_request_intake\n- Task node: validate_request (check structure, metadata completeness)\n- Task node: retrieve_relevant_data (find datasets needed for the request)\n- Task node: process_data_for_compliance (prepare data for legal checks)\n- Task node: run_compliance_checks (sector law, DPIA, obligations)\n- Task node: prepare_sharing_decision (YES/NO decision support)\n- Destination node: tk_decision_output\n\nConnect nodes in a linear sequence.\nKeep the pipeline minimal and aligned with the compliance flow in the diagram.",
+      "wasAttributedTo": "urn:inlumen:provenance:agent:operator"
+    },
+    {
+      "@id": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:activity:7cfde617-9a07-4522-a6cd-02f4ca6347ca",
+      "@type": [
+        "prov:Activity",
+        "inlumen:PipelineModification"
+      ],
+      "label": "Agent executed pipeline operation 'create_step'.",
+      "action": "create_step",
+      "summary": "Agent executed pipeline operation 'create_step'.",
+      "used": [
+        "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:458ab263-4632-4a15-9847-fb5f3884d8b6",
+        "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:query:7cfde617-9a07-4522-a6cd-02f4ca6347ca"
+      ],
+      "wasAssociatedWith": "urn:inlumen:provenance:agent:agent",
+      "versionUid": "main",
+      "sessionId": "31d2bffe-c372-4dc6-bc22-4fc2068bc8b9",
+      "details": {
+        "graph_snapshot": {
+          "edge_count": 5,
+          "edges": [
+            {
+              "source": "1",
+              "source_port": "data",
+              "target": "2",
+              "target_port": "input"
+            },
+            {
+              "source": "2",
+              "source_port": "output",
+              "target": "3",
+              "target_port": "input"
+            },
+            {
+              "source": "3",
+              "source_port": "output",
+              "target": "4",
+              "target_port": "input"
+            },
+            {
+              "source": "4",
+              "source_port": "output",
+              "target": "5",
+              "target_port": "input"
+            },
+            {
+              "source": "5",
+              "source_port": "output",
+              "target": "6",
+              "target_port": "input"
+            }
+          ],
+          "node_count": 6,
+          "nodes": [
+            {
+              "id": "1",
+              "label": "tk_request_intake",
+              "type": "source",
+              "x": 0.0,
+              "y": 0.0
+            },
+            {
+              "id": "2",
+              "label": "validate_request",
+              "type": "task",
+              "x": 300.0,
+              "y": 0.0
+            },
+            {
+              "id": "3",
+              "label": "retrieve_relevant_data",
+              "type": "task",
+              "x": 600.0,
+              "y": 0.0
+            },
+            {
+              "id": "4",
+              "label": "process_data_for_compliance",
+              "type": "task",
+              "x": 900.0,
+              "y": 0.0
+            },
+            {
+              "id": "5",
+              "label": "run_compliance_checks",
+              "type": "task",
+              "x": 1200.0,
+              "y": 0.0
+            },
+            {
+              "id": "6",
+              "label": "prepare_sharing_decision",
+              "type": "task",
+              "x": 1500.0,
+              "y": 0.0
+            }
+          ],
+          "truncated": false
+        },
+        "query_type": "create_step",
+        "result": "[{'step': {'target_port': 'input', 'uid': 'e153ed9a-dd1e-418d-a9ff-cdeafc6ff443', 'after_flow_id': '5', 'flow_id': '6', 'source_port': 'output', 'x': 1500.0, 'y': 0.0, 'description': 'Generate decision support (YES/NO)', 'label': 'prepare_sharing_decision', 'type': 'task', 'pipeline_updated_at': '2026-09-07T13:27:06.587Z'}}]",
+        "session_id": "31d2bffe-c372-4dc6-bc22-4fc2068bc8b9",
+        "user_query": "Design a pipeline that models the Trondheim Kommune compliance flow.\n\nPipeline requirements:\n- Source node: tk_request_intake\n- Task node: validate_request (check structure, metadata completeness)\n- Task node: retrieve_relevant_data (find datasets needed for the request)\n- Task node: process_data_for_compliance (prepare data for legal checks)\n- Task node: run_compliance_checks (sector law, DPIA, obligations)\n- Task node: prepare_sharing_decision (YES/NO decision support)\n- Destination node: tk_decision_output\n\nConnect nodes in a linear sequence.\nKeep the pipeline minimal and aligned with the compliance flow in the diagram."
+      },
+      "startedAtTime": "2026-09-07T13:27:06.963Z",
+      "endedAtTime": "2026-09-07T13:27:06.963Z"
+    },
+    {
+      "@id": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:7cfde617-9a07-4522-a6cd-02f4ca6347ca",
+      "@type": [
+        "prov:Entity",
+        "inlumen:PipelineState"
+      ],
+      "label": "Main state 7",
+      "specializationOf": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100",
+      "wasGeneratedBy": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:activity:7cfde617-9a07-4522-a6cd-02f4ca6347ca",
+      "wasRevisionOf": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:458ab263-4632-4a15-9847-fb5f3884d8b6",
+      "generatedAtTime": "2026-09-07T13:27:06.963Z"
+    },
+    {
+      "@id": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:query:c05cd571-a831-41c2-a0af-7b22562ebde7",
+      "@type": [
+        "prov:Entity",
+        "inlumen:UserQuery"
+      ],
+      "label": "User query",
+      "value": "Design a pipeline that models the Trondheim Kommune compliance flow.\n\nPipeline requirements:\n- Source node: tk_request_intake\n- Task node: validate_request (check structure, metadata completeness)\n- Task node: retrieve_relevant_data (find datasets needed for the request)\n- Task node: process_data_for_compliance (prepare data for legal checks)\n- Task node: run_compliance_checks (sector law, DPIA, obligations)\n- Task node: prepare_sharing_decision (YES/NO decision support)\n- Destination node: tk_decision_output\n\nConnect nodes in a linear sequence.\nKeep the pipeline minimal and aligned with the compliance flow in the diagram.",
+      "wasAttributedTo": "urn:inlumen:provenance:agent:operator"
+    },
+    {
+      "@id": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:activity:c05cd571-a831-41c2-a0af-7b22562ebde7",
+      "@type": [
+        "prov:Activity",
+        "inlumen:PipelineModification"
+      ],
+      "label": "Agent executed pipeline operation 'create_step'.",
+      "action": "create_step",
+      "summary": "Agent executed pipeline operation 'create_step'.",
+      "used": [
+        "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:7cfde617-9a07-4522-a6cd-02f4ca6347ca",
+        "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:query:c05cd571-a831-41c2-a0af-7b22562ebde7"
+      ],
+      "wasAssociatedWith": "urn:inlumen:provenance:agent:agent",
+      "versionUid": "main",
+      "sessionId": "31d2bffe-c372-4dc6-bc22-4fc2068bc8b9",
+      "details": {
+        "graph_snapshot": {
+          "edge_count": 6,
+          "edges": [
+            {
+              "source": "1",
+              "source_port": "data",
+              "target": "2",
+              "target_port": "input"
+            },
+            {
+              "source": "2",
+              "source_port": "output",
+              "target": "3",
+              "target_port": "input"
+            },
+            {
+              "source": "3",
+              "source_port": "output",
+              "target": "4",
+              "target_port": "input"
+            },
+            {
+              "source": "4",
+              "source_port": "output",
+              "target": "5",
+              "target_port": "input"
+            },
+            {
+              "source": "5",
+              "source_port": "output",
+              "target": "6",
+              "target_port": "input"
+            },
+            {
+              "source": "6",
+              "source_port": "output",
+              "target": "7",
+              "target_port": "data"
+            }
+          ],
+          "node_count": 7,
+          "nodes": [
+            {
+              "id": "1",
+              "label": "tk_request_intake",
+              "type": "source",
+              "x": 0.0,
+              "y": 0.0
+            },
+            {
+              "id": "2",
+              "label": "validate_request",
+              "type": "task",
+              "x": 300.0,
+              "y": 0.0
+            },
+            {
+              "id": "3",
+              "label": "retrieve_relevant_data",
+              "type": "task",
+              "x": 600.0,
+              "y": 0.0
+            },
+            {
+              "id": "4",
+              "label": "process_data_for_compliance",
+              "type": "task",
+              "x": 900.0,
+              "y": 0.0
+            },
+            {
+              "id": "5",
+              "label": "run_compliance_checks",
+              "type": "task",
+              "x": 1200.0,
+              "y": 0.0
+            },
+            {
+              "id": "6",
+              "label": "prepare_sharing_decision",
+              "type": "task",
+              "x": 1500.0,
+              "y": 0.0
+            },
+            {
+              "id": "7",
+              "label": "tk_decision_output",
+              "type": "destination",
+              "x": 1800.0,
+              "y": 0.0
+            }
+          ],
+          "truncated": false
+        },
+        "query_type": "create_step",
+        "result": "[{'step': {'target_port': 'data', 'uid': '1a84630c-16f6-4458-98a6-d30a22ffc317', 'after_flow_id': '6', 'flow_id': '7', 'source_port': 'output', 'x': 1800.0, 'y': 0.0, 'description': 'Output decision result for Trondheim Kommune compliance', 'label': 'tk_decision_output', 'type': 'destination', 'pipeline_updated_at': '2026-09-07T13:27:11.238Z'}}]",
+        "session_id": "31d2bffe-c372-4dc6-bc22-4fc2068bc8b9",
+        "user_query": "Design a pipeline that models the Trondheim Kommune compliance flow.\n\nPipeline requirements:\n- Source node: tk_request_intake\n- Task node: validate_request (check structure, metadata completeness)\n- Task node: retrieve_relevant_data (find datasets needed for the request)\n- Task node: process_data_for_compliance (prepare data for legal checks)\n- Task node: run_compliance_checks (sector law, DPIA, obligations)\n- Task node: prepare_sharing_decision (YES/NO decision support)\n- Destination node: tk_decision_output\n\nConnect nodes in a linear sequence.\nKeep the pipeline minimal and aligned with the compliance flow in the diagram."
+      },
+      "startedAtTime": "2026-09-07T13:27:12.036Z",
+      "endedAtTime": "2026-09-07T13:27:12.036Z"
+    },
+    {
+      "@id": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:c05cd571-a831-41c2-a0af-7b22562ebde7",
+      "@type": [
+        "prov:Entity",
+        "inlumen:PipelineState"
+      ],
+      "label": "Main state 8",
+      "specializationOf": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100",
+      "wasGeneratedBy": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:activity:c05cd571-a831-41c2-a0af-7b22562ebde7",
+      "wasRevisionOf": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:7cfde617-9a07-4522-a6cd-02f4ca6347ca",
+      "generatedAtTime": "2026-09-07T13:27:12.036Z"
+    },
+    {
+      "@id": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:activity:dad699eb-15e4-4cc9-a2b8-b0859228152f",
+      "@type": [
+        "prov:Activity",
+        "inlumen:PipelineModification"
+      ],
+      "label": "Moved step 2 on the canvas.",
+      "action": "node_moved",
+      "summary": "Moved step 2 on the canvas.",
+      "used": [
+        "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:c05cd571-a831-41c2-a0af-7b22562ebde7"
+      ],
+      "wasAssociatedWith": "urn:inlumen:provenance:agent:manual",
+      "versionUid": "main",
+      "details": {
+        "flow_id": "2",
+        "graph_snapshot": {
+          "edge_count": 6,
+          "edges": [
+            {
+              "source": "1",
+              "source_port": "data",
+              "target": "2",
+              "target_port": "input"
+            },
+            {
+              "source": "2",
+              "source_port": "output",
+              "target": "3",
+              "target_port": "input"
+            },
+            {
+              "source": "3",
+              "source_port": "output",
+              "target": "4",
+              "target_port": "input"
+            },
+            {
+              "source": "4",
+              "source_port": "output",
+              "target": "5",
+              "target_port": "input"
+            },
+            {
+              "source": "5",
+              "source_port": "output",
+              "target": "6",
+              "target_port": "input"
+            },
+            {
+              "source": "6",
+              "source_port": "output",
+              "target": "7",
+              "target_port": "data"
+            }
+          ],
+          "node_count": 7,
+          "nodes": [
+            {
+              "id": "1",
+              "label": "tk_request_intake",
+              "type": "source",
+              "x": 0.0,
+              "y": 0.0
+            },
+            {
+              "id": "2",
+              "label": "validate_request",
+              "type": "task",
+              "x": 300.0,
+              "y": 0.0
+            },
+            {
+              "id": "3",
+              "label": "retrieve_relevant_data",
+              "type": "task",
+              "x": 600.0,
+              "y": 0.0
+            },
+            {
+              "id": "4",
+              "label": "process_data_for_compliance",
+              "type": "task",
+              "x": 900.0,
+              "y": 0.0
+            },
+            {
+              "id": "5",
+              "label": "run_compliance_checks",
+              "type": "task",
+              "x": 1200.0,
+              "y": 0.0
+            },
+            {
+              "id": "6",
+              "label": "prepare_sharing_decision",
+              "type": "task",
+              "x": 1500.0,
+              "y": 0.0
+            },
+            {
+              "id": "7",
+              "label": "tk_decision_output",
+              "type": "destination",
+              "x": 1800.0,
+              "y": 0.0
+            }
+          ],
+          "truncated": false
+        },
+        "x": 300,
+        "y": 0
+      },
+      "startedAtTime": "2026-09-07T13:39:05.778Z",
+      "endedAtTime": "2026-09-07T13:39:05.778Z"
+    },
+    {
+      "@id": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main",
+      "@type": [
+        "prov:Entity",
+        "inlumen:PipelineState",
+        "inlumen:PipelineVersion"
+      ],
+      "label": "Main",
+      "specializationOf": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100",
+      "wasGeneratedBy": "urn:inlumen:provenance:bundle:30e9dcaa-f44b-48c1-ac44-18338865d100:main:activity:dad699eb-15e4-4cc9-a2b8-b0859228152f",
+      "wasRevisionOf": "urn:inlumen:provenance:pipeline:30e9dcaa-f44b-48c1-ac44-18338865d100:version:main:state:c05cd571-a831-41c2-a0af-7b22562ebde7",
+      "generatedAtTime": "2026-09-07T13:39:05.778Z",
+      "updatedAt": "2026-09-07T13:39:03.587Z"
+    },
+    {
+      "@id": "urn:inlumen:provenance:agent:agent",
+      "@type": [
+        "prov:SoftwareAgent",
+        "inlumen:PipelineEditorAgent"
+      ],
+      "label": "inLUMEN pipeline editor agent",
+      "actedOnBehalfOf": "urn:inlumen:provenance:agent:operator"
+    },
+    {
+      "@id": "urn:inlumen:provenance:agent:operator",
+      "@type": [
+        "prov:Agent",
+        "inlumen:HumanOperator"
+      ],
+      "label": "inLUMEN operator"
+    },
+    {
+      "@id": "urn:inlumen:provenance:agent:manual",
+      "@type": [
+        "prov:Agent",
+        "inlumen:HumanOperator"
+      ],
+      "label": "inLUMEN operator"
+    }
+  ]
+}
