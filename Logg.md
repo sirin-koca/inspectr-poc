@@ -1,7 +1,5 @@
 # InspectR Review Summary 260926
 
-## Executive summary
-
 The review identified several logical, technical, and functional weaknesses in the InspectR proof of concept. The most important corrected issue concerned the interpretation of human-oversight evidence under AIA-14.
 
 The policy previously treated two fundamentally different situations as the same:
