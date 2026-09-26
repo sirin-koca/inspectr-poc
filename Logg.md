@@ -181,3 +181,183 @@ The correction follows a conservative evidence model:
 - Missing or ambiguous evidence should produce `HUMAN`.
 
 This preserves the project's stated principle that InspectR should not claim compliance when the evidence is insufficient, while also ensuring that explicit violations are not incorrectly downgraded to an indeterminate result.
+
+---
+
+**Current Worktree**
+
+Three source files are modified and unstaged:
+
+- `policy.rego`
+- `inspectr_taxonomy.json`
+- `taxonomy.py`
+
+No other application files were changed.
+
+**What Changed**
+
+`policy.rego` no longer evaluates EU AI Act rules. It now evaluates the TK/MUNDAT pipeline against five design-time rules:
+
+| Rule | Purpose |
+|---|---|
+| `TK-STRUCT-01` | Checks the seven required TK stages and their graph connections. |
+| `TK-DATA-01` | Checks source identifiers and approval status. |
+| `TK-TRACE-01` | Checks `has_logging: true` on every node. |
+| `TK-RISK-01` | Checks that `run_compliance_checks` exists. |
+| `TK-HUMAN-01` | Checks human review evidence before sharing. |
+
+The structure rule checks connections by node IDs, not the order of the JSON `nodes` array. This avoids falsely rejecting valid inLUMEN exports whose nodes are serialized in reverse order.
+
+Human-review behavior is:
+
+- `human_oversight: true` → `OK`
+- `human_oversight: false` → `FAIL`
+- missing `human_oversight` → `HUMAN`
+
+`inspectr_taxonomy.json` now contains:
+
+- TK pipeline structure;
+- MUNDAT data-source provenance;
+- DPIA and risk assessment;
+- logging and traceability;
+- human review before sharing.
+
+Each new executable constraint includes a `rule_id` and `evidence_fields`.
+
+`taxonomy.py` was updated to display TK rule IDs and evidence fields. It no longer displays AIA-specific metadata, and its `st.set_page_config()` call now occurs before other Streamlit commands.
+
+**Current Application Logic**
+
+The application starts in `app.py`.
+
+It:
+
+1. Configures Streamlit.
+2. Initializes session state:
+   - `blueprint`
+   - `blueprint_filename`
+   - `evaluation_results`
+3. Registers the application pages.
+4. Displays the DataPACT logo and global footer.
+5. Runs the selected page using `pg.run()`.
+
+The main executable workflow is `evaluation.py`:
+
+1. User uploads a JSON blueprint.
+2. The file is parsed with Python’s `json` module.
+3. The blueprint is stored in Streamlit session state.
+4. User presses `Run InspectR`.
+5. `src.evaluator.evaluate()` is called.
+6. OPA evaluates `data.inspectr.results`.
+7. Results are displayed as `OK`, `FAIL`, or `HUMAN`.
+8. Each result exposes its reason, evidence, and remedy.
+
+There is still no Intermediate Representation. The uploaded blueprint is passed directly to Rego.
+
+**Core Components**
+
+- `app.py`: application entry point, navigation, session state, global layout.
+- `evaluator.py`: Python-to-OPA integration and result validation.
+- `policy.rego`: TK/MUNDAT executable rules.
+- `inspectr_taxonomy.json`: machine-readable taxonomy.
+- `evaluation.py`: blueprint upload and evaluation workflow.
+- `taxonomy.py`: Plotly taxonomy visualization.
+- data/: raw, extended, non-compliant, and alternative blueprint files.
+- assets/: supplementary rule catalog, currently not used by the runtime.
+- images/: diagrams, logos, and page assets.
+- tk-uc/: TK use-case documentation, inLUMEN export, provenance, and source documents.
+
+Registered pages include:
+
+- Main
+- Overview
+- Engineering PaC
+- The Semantic Gap
+- Use Case
+- Research
+- Taxonomy
+- Architecture
+- Evaluation
+- Test
+
+`aia_subset.py` exists but is not registered in navigation.
+
+**Current Policy Execution**
+
+The evaluator in `evaluator.py`:
+
+1. Requires the input to be a dictionary.
+2. Requires `pipeline` to be an object.
+3. Requires `pipeline.nodes` to be a list.
+4. Invokes OPA using the hard-coded path `opa.exe`.
+5. Loads `policy.rego`.
+6. Queries `data.inspectr.results`.
+7. Parses the OPA JSON response.
+8. Validates that every result contains:
+   - `rule`
+   - `status`
+   - `legal_reference`
+   - `reason`
+   - `evidence`
+   - `remedy`
+9. Returns the results to Streamlit.
+
+**Observed Blueprint Results**
+
+The current policy was tested against all bundled blueprints:
+
+| Blueprint | Result |
+|---|---|
+| `inlumen-tk-uc-extended.json` | Structure OK, provenance OK, logging OK, risk OK, human review FAIL |
+| `inlumen-tk-uc-non-compliant.json` | Structure OK, provenance OK, logging FAIL, risk OK, human review FAIL |
+| `inlumen-tk-uc.json` | Structure OK, provenance FAIL, logging FAIL, risk OK, human review HUMAN |
+| `tk_extended_blueprint.json` | Structure OK, provenance FAIL, logging OK, risk OK, human review HUMAN |
+
+The extended blueprint is therefore structurally valid and contains the expected compliance metadata, but explicitly declares that human oversight is disabled.
+
+**Validation Status**
+
+Passed:
+
+- Rego syntax validation with OPA.
+- Taxonomy JSON parsing.
+- Python compilation for edited pages and core application files.
+- Runtime evaluation of all bundled blueprints.
+
+**Current Limitations**
+
+The app is functional as a PoC, but several limitations remain:
+
+- OPA must exist at `opa.exe`.
+- The policy path is relative to the current working directory.
+- The evaluator does not validate connections, node fields, or schema versions before invoking Rego.
+- Evaluation only accepts uploaded files; there is no built-in blueprint selector.
+- Results are reset based on filename rather than file content.
+- The evaluation page still contains the text `AIA provision`, although the executable policy is now TK/MUNDAT-specific.
+- Several explanatory pages still describe the earlier AIA-oriented PoC.
+- The old `TK.PipelineStructure` and `TK.ComplianceRequirements` taxonomy branches remain alongside the new `TK.MUNDATRequirements` branch.
+- The policy checks design-time declarations only. It does not prove that the actual data processing, DPIA, anonymization, approval, or sharing operations occur at runtime.
+
+**Overall Status**
+
+The app currently works as a **TK/MUNDAT design-time pipeline inspection PoC**:
+
+```text
+inLUMEN JSON blueprint
+        |
+        v
+Python evaluator
+        |
+        v
+OPA + TK/MUNDAT Rego policy
+        |
+        v
+OK / FAIL / HUMAN results
+        |
+        v
+Streamlit evidence and remedy display
+```
+
+It now evaluates the TK use-case structure and declared compliance evidence rather than presenting the TK use case as an EU AI Act evaluation.
+
+
