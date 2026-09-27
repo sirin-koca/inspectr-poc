@@ -40,7 +40,23 @@ The possible contribution is the combination of:
 - evidence sufficiency handling;
 - `OK / FAIL / HUMAN` decision semantics;
 - separation between legal interpretation, policy encoding, and pipeline representation.
-The thesis still needs a literature and related-work review to establish whether this combination is genuinely novel.
+
+Next steps: 
+1. The thesis still needs a literature and related-work review to establish whether this combination is genuinely novel.
+
+2. Defining formal rule specification for each policy:
+Rule ID
+Requirement source
+Operational interpretation
+Applicability
+Required evidence
+Blueprint field
+Rego condition
+OK meaning
+FAIL meaning
+HUMAN meaning
+Known limitations
+
 
 ## Agreed Boundary
 
