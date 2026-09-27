@@ -35,6 +35,7 @@ pages = [
     st.Page("pages/gap.py", title=":: The Semantic Gap"),
     st.Page("pages/tk_uc.py", title=":: Use Case"),
     st.Page("pages/research.py", title=":: Research"),
+    st.Page("pages/aia_subset.py", title=":: Regulatory Scope"),
     st.Page("pages/taxonomy.py", title=":: Taxonomy"),
     st.Page("pages/architecture.py", title=":: Architecture"),
     st.Page("pages/evaluation.py", title=":: Evaluation"),

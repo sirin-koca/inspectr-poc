@@ -1,5 +1,85 @@
 import streamlit as st
 
+st.set_page_config(
+    page_title="InspectR | Semantic Gap",
+    layout="wide",
+    initial_sidebar_state="collapsed",
+)
+
+st.title("From the semantic gap to executable policy")
+st.write(
+    "The central research challenge is translating contextual, principle-based requirements "
+    "into deterministic logic without hiding the interpretation that made the translation possible."
+)
+
+st.divider()
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.subheader("Layer 1: Source requirement")
+    st.markdown(
+        "**Source:** regulation, guidance, or TK/MUNDAT business requirement\n\n"
+        "**Nature:** contextual and not directly executable.\n\n"
+        "**TK example:** municipal data-sharing requests need a managed and traceable process."
+    )
+
+with col2:
+    st.subheader("Layer 2: Interpretation")
+    st.markdown(
+        "**Source:** legal, governance, engineering, and research decisions\n\n"
+        "**Nature:** explicit and reviewable.\n\n"
+        "**TK example:** each declared source needs an identifier and approval evidence."
+    )
+
+with col3:
+    st.subheader("Layer 3: Policy-as-Code")
+    st.markdown(
+        "**Source:** Rego policy evaluated by OPA\n\n"
+        "**Nature:** deterministic and evidence-bound.\n\n"
+        "**TK example:** `approved_source == true` produces a rule result."
+    )
+
+st.divider()
+st.header("Concrete TK example")
+left, right = st.columns(2)
+
+with left:
+    st.subheader("Blueprint evidence")
+    st.code(
+        """{
+  "label": "prepare_sharing_decision",
+  "compliance_extensions": {
+    "human_oversight": false
+  }
+}""",
+        language="json",
+    )
+    st.caption("The blueprint declares explicit negative evidence.")
+
+with right:
+    st.subheader("Rego interpretation")
+    st.code(
+        """object.get(ext, "human_oversight", null) == false
+    -> FAIL
+
+object.get(ext, "human_oversight", null) == null
+    -> HUMAN""",
+        language="rego",
+    )
+    st.caption("The policy distinguishes explicit failure from missing evidence.")
+
+st.divider()
+st.header("What the PoC cannot decide")
+st.markdown(
+    """
+    - OPA cannot decide what a broad legal requirement means in every context.
+    - A static blueprint cannot prove that a declared control occurs at runtime.
+    - Incorrect or incomplete evidence can produce misleading results.
+    - Changes in law, guidance, or organizational policy require policy review.
+    """
+)
+import streamlit as st
+
 # Page Configuration
 st.set_page_config(
     page_title="PaC Compliance Challenges",

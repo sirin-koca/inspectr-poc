@@ -98,7 +98,7 @@ with evaluate_col:
         - Evidence
         - Reason
         - Remedy
-        - AIA provision
+        - Rule reference
         """
     )
 

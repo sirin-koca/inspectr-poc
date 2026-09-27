@@ -3,6 +3,94 @@ import streamlit as st
 st.set_page_config(
     page_title="InspectR | Overview",
     page_icon="🔎",
+    layout="wide",
+)
+
+st.title("InspectR PoC")
+st.code("TK/MUNDAT case - direct static blueprint evaluation")
+
+st.info(
+    "InspectR is a proof-of-concept architecture for design-time compliance tooling. "
+    "It investigates how selected regulatory and governance requirements can be operationalized "
+    "as explainable Policy-as-Code checks over static data-pipeline blueprints. "
+    "This PoC does not determine legal compliance as a whole."
+)
+
+st.header("The semantic gap")
+st.write(
+    "Regulations and business requirements are contextual and principle-based. "
+    "OPA and Rego require explicit fields and deterministic conditions. InspectR studies the "
+    "translation between those two forms without hiding the interpretation."
+)
+
+col1, col2, col3 = st.columns(3, gap="large")
+
+with col1:
+    st.subheader("1. Requirement source")
+    st.markdown(
+        "Regulations, guidance, and TK/MUNDAT requirements provide the source material. "
+        "They are not directly executable."
+    )
+
+with col2:
+    st.subheader("2. Operational interpretation")
+    st.markdown(
+        "A researcher or organization defines what the requirement means in this context, "
+        "what evidence is required, and what counts as sufficient or ambiguous evidence."
+    )
+
+with col3:
+    st.subheader("3. Policy-as-Code")
+    st.markdown(
+        "The interpretation becomes an independent Rego policy. OPA evaluates that policy "
+        "against the evidence declared in the blueprint."
+    )
+
+st.divider()
+st.header("Traceability model")
+st.code(
+    """Requirement or use-case need
+        |
+        v
+Operational interpretation
+        |
+        v
+Required evidence
+        |
+        v
+TK/MUNDAT blueprint fields
+        |
+        v
+Rego condition evaluated by OPA
+        |
+        v
+OK / FAIL / HUMAN
+        |
+        v
+Evidence + reason + rule reference + remedy""",
+    language="text",
+)
+
+st.warning(
+    "GDPR and the EU AI Act are possible regulatory sources for the broader InspectR project. "
+    "The active rules in this TK PoC are local design-time checks, not a complete implementation of either law."
+)
+
+st.header("PoC boundary")
+st.markdown(
+    """
+    - The blueprint is evaluated directly.
+    - No Intermediate Representation is implemented in this PoC.
+    - The pipeline is not executed.
+    - Results are correct relative to the encoded operational rule, not proof of legal compliance.
+    - Missing or ambiguous evidence is separated from explicit negative evidence.
+    """
+)
+import streamlit as st
+
+st.set_page_config(
+    page_title="InspectR | Overview",
+    page_icon="🔎",
     layout="wide"
 )
 
