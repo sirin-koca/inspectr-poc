@@ -35,7 +35,7 @@ OK / FAIL / HUMAN + evidence + reason + remedy""",
 )
 
 st.image(
-    "images/arch-2.png",
+    "images/arch.png",
     caption="InspectR PoC architecture: direct blueprint evaluation without IR",
     width=1100,
 )
