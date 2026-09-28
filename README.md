@@ -66,6 +66,9 @@ Evidence · Reason · Rule Reference · Remedy
 ![Architecture diagram](https://github.com/user-attachments/assets/b5a0fdb4-8da4-4e42-b50c-b0fb126dc812)
 ![Architecture diagram](https://github.com/user-attachments/assets/f8edb06e-723b-495f-ab9b-33f7d579591d)
 
+### Technology
+`Python` · `Plotly` · `Pandas` · `JSON` · `PaC` · `Open Policy Agent (OPA)` · `Rego` · `inLUMEN`
+
 ### Repository Structure
 
 ```text
@@ -79,8 +82,19 @@ inspectr-poc/
 └── requirements.txt
 ```
 
-### Technology
-`Python` · `Plotly` · `Pandas` · `JSON` · `PaC` · `Open Policy Agent (OPA)` · `Rego` · `inLUMEN`
+### Scientific contribution
+InspectR demonstrates an architecture and operational method for translating organisational policies into explainable Policy-as-Code controls over static data-pipeline blueprints.
+
+The contribution can be evaluated through:
+
+- separation of policy from application logic;
+- independent OPA/Rego decision evaluation;
+- explicit evidence requirements;
+- traceability from requirement to executable rule;
+- distinction between OK, FAIL, and HUMAN;
+- conservative treatment of missing or ambiguous evidence;
+- applicability to pipeline design before execution;
+- use of a realistic municipal data-sharing case.
 
 ### Disclaimer
 This is a research prototype. InspectR does not certify compliance, determine legal compliance as a whole, encode legal text directly, replace legal interpretation, or execute the pipeline. Results are correct only relative to the explicitly encoded operational policy and available blueprint evidence.
