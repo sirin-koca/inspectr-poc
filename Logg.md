@@ -99,23 +99,9 @@ The policy also reports the affected component in the evidence:
 
 ## Other issues identified during the review
 
-The following issues were found but were not changed as part of the focused AIA-14 correction.
+The following issues are related to the limited and local PoC implementation.
 
-### 1. OPA executable path is machine-specific
-
-In [`src/evaluator.py`](src/evaluator.py), OPA is invoked using:
-
-```python
-C:\Tools\OPA\opa.exe
-```
-
-This makes the evaluator dependent on one specific Windows installation path. The application will fail on another machine unless OPA exists at exactly that location.
-
-The error message says that OPA should be available on `PATH`, but the implementation does not actually search `PATH`.
-
-**Recommended improvement:** Resolve OPA through configuration or `PATH`, with an optional environment-variable override.
-
-### 2. The policy path is relative to the current working directory
+### 1. The policy path is relative to the current working directory
 
 The evaluator uses:
 
@@ -127,7 +113,7 @@ This works only when Streamlit is launched from the repository root. If the appl
 
 **Recommended improvement:** Build the policy path relative to the project or evaluator module location instead of the process working directory.
 
-### 3. `pandas` is missing from the dependency file
+### 2. `pandas` is missing from the dependency file
 
 [`pages/taxonomy.py`](pages/taxonomy.py) imports pandas, but [`requirements.txt`](requirements.txt) does not declare it.
 
@@ -141,7 +127,7 @@ pandas
 
 to the dependency file.
 
-### 4. Blueprint and policy schema are not fully aligned
+### 3. Blueprint and policy schema are not fully aligned
 
 The standard bundled blueprint [`data/inlumen-tk-uc.json`](data/inlumen-tk-uc.json) does not contain the `compliance_extensions` fields expected by the policy.
 
@@ -163,7 +149,6 @@ This may be intentional for demonstrating insufficient evidence, but the distinc
 ## Validation performed
 
 The corrected policy was validated with OPA:
-
 - Rego syntax check: passed
 - Extended blueprint evaluation: passed
 - Explicit `human_oversight: false`: correctly classified as `FAIL`
@@ -184,17 +169,7 @@ This preserves the project's stated principle that InspectR should not claim com
 
 ---
 
-**Current Worktree**
-
-Three source files are modified and unstaged:
-
-- `policy.rego`
-- `inspectr_taxonomy.json`
-- `taxonomy.py`
-
-No other application files were changed.
-
-**What Changed**
+**Regulation scope**
 
 `policy.rego` no longer evaluates EU AI Act rules. It now evaluates the TK/MUNDAT pipeline against five design-time rules:
 
