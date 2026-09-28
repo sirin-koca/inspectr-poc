@@ -5,6 +5,8 @@ _Proof of Concept (PoC)_
 
 > Compliance means satisfying conditions defined by organisational policies derived from laws and regulations, such as the GDPR or AIA.
 
+**Thesis title:** *Architecting a Compliance Engine for Multi-Agent Data Pipeline Ecosystems using Policy-as-Code*
+
 InspectR is a design‑time compliance engine that operationalizes regulatory requirements (GDPR / AIA) as Policy‑as‑Code, by utilizing decoupled OPA/Rego rules to statically assess pipeline blueprints and outputs machine‑readable governance results pre‑deployment.
 
 InspectR investigates how regulatory requirements can be operationalised into traceable, evidence-bound, machine-checkable design-time policies—and where that automation stops.
@@ -80,11 +82,12 @@ inspectr-poc/
 ### Technology
 `Python` · `Plotly` · `Pandas` · `JSON` · `PaC` · `Open Policy Agent (OPA)` · `Rego` · `inLUMEN`
 
-### Research Context
+### Disclaimer
+This is a research prototype. InspectR does not certify compliance, determine legal compliance as a whole, encode legal text directly, replace legal interpretation, or execute the pipeline. Results are correct only relative to the explicitly encoded operational policy and available blueprint evidence.
+
+InspectR is an independent, standalone, generic policy engine. This repository showcases only a specific use case (TK use case). The PoC is designed to demonstrate the feasibility of the approach without the complexity of a full implementation. During this PoC implementation of InspectR WE WILL NOT USE IR (the graph model, the Intermediate Representation) for KISS purposes.
 
 InspectR is developed as part of an MSc thesis at the University of Oslo in collaboration with SINTEF and the EU-funded DataPACT project.
-
-**Thesis:** *Architecting a Compliance Engine for Multi-Agent Data Pipeline Ecosystems using Policy-as-Code*
 
 > _Research prototype — work in progress_
 
