@@ -1,197 +1,156 @@
 import streamlit as st
 
-st.set_page_config(
-    page_title="InspectR | Semantic Gap",
-    layout="wide",
-    initial_sidebar_state="collapsed",
-)
+st.title("The Semantic Gap")
+st.caption("From compliance requirements to deterministic software logic")
 
-st.title("From the semantic gap to executable policy")
-st.write(
-    "The central research challenge is translating contextual, principle-based requirements "
-    "into deterministic logic without hiding the interpretation that made the translation possible."
+st.markdown(
+    """
+    Legal and organisational requirements are expressed for **human interpretation**.
+    Policy engines evaluate **explicit, deterministic conditions**.
+
+    **The semantic gap is the translation between these two forms.**
+    """
 )
 
 st.divider()
-col1, col2, col3 = st.columns(3)
 
-with col1:
-    st.subheader("Layer 1: Source requirement")
-    st.markdown(
-        "**Source:** regulation, guidance, or TK/MUNDAT business requirement\n\n"
-        "**Nature:** contextual and not directly executable.\n\n"
-        "**TK example:** municipal data-sharing requests need a managed and traceable process."
-    )
+# --------------------------------------------------
+# THE GAP
+# --------------------------------------------------
 
-with col2:
-    st.subheader("Layer 2: Interpretation")
-    st.markdown(
-        "**Source:** legal, governance, engineering, and research decisions\n\n"
-        "**Nature:** explicit and reviewable.\n\n"
-        "**TK example:** each declared source needs an identifier and approval evidence."
-    )
-
-with col3:
-    st.subheader("Layer 3: Policy-as-Code")
-    st.markdown(
-        "**Source:** Rego policy evaluated by OPA\n\n"
-        "**Nature:** deterministic and evidence-bound.\n\n"
-        "**TK example:** `approved_source == true` produces a rule result."
-    )
-
-st.divider()
-st.header("Concrete TK example")
-left, right = st.columns(2)
+left, middle, right = st.columns([1, 0.8, 1])
 
 with left:
-    st.subheader("Blueprint evidence")
-    st.code(
-        """{
-  "label": "prepare_sharing_decision",
-  "compliance_extensions": {
-    "human_oversight": false
-  }
-}""",
-        language="json",
+    st.subheader("Human-readable")
+    st.markdown(
+        """
+        **Regulation / Policy**
+
+        - Contextual
+        - Semantic
+        - May require judgement
+        - May contain ambiguity
+        """
     )
-    st.caption("The blueprint declares explicit negative evidence.")
+
+with middle:
+    st.subheader("Semantic Gap")
+    st.markdown(
+        """
+        What does the requirement **mean operationally?**
+
+        What must be **observable?**
+
+        What can software **actually evaluate?**
+        """
+    )
 
 with right:
-    st.subheader("Rego interpretation")
-    st.code(
-        """object.get(ext, "human_oversight", null) == false
-    -> FAIL
+    st.subheader("Machine-evaluable")
+    st.markdown(
+        """
+        **Policy-as-Code**
 
-object.get(ext, "human_oversight", null) == null
-    -> HUMAN""",
-        language="rego",
+        - Explicit input
+        - Defined conditions
+        - Deterministic logic
+        - Machine-checkable
+        """
     )
-    st.caption("The policy distinguishes explicit failure from missing evidence.")
 
 st.divider()
-st.header("What the PoC cannot decide")
+
+# --------------------------------------------------
+# TRANSLATION
+# --------------------------------------------------
+
+st.subheader("Operationalisation")
+
+st.code(
+    """Regulatory Requirement
+        ↓
+Organisational Policy
+        ↓
+Pipeline Requirement / Condition
+        ↓
+Required Observable Evidence
+        ↓
+Executable Rego Rule
+        ↓
+OPA Evaluation""",
+    language="text",
+)
+
 st.markdown(
     """
-    - OPA cannot decide what a broad legal requirement means in every context.
-    - A static blueprint cannot prove that a declared control occurs at runtime.
-    - Incorrect or incomplete evidence can produce misleading results.
-    - Changes in law, guidance, or organizational policy require policy review.
+    The critical step is **not converting legal text directly into code**.
+
+    It is making the intermediate interpretation explicit:
+    **what condition must hold, what evidence represents it, and what rule evaluates it.**
     """
-)
-import streamlit as st
-
-# Page Configuration
-st.set_page_config(
-    page_title="PaC Compliance Challenges",
-    page_icon=None,
-    layout="wide",
-    initial_sidebar_state="collapsed"
-)
-
-# Header Section
-st.title("🫧From fuzzy legislation to deterministic software logic")
-st.markdown(
-    "Implementing automated compliance checks via tools like Open Policy Agent (OPA) and Rego "
-    "uncovers a fundamental challenge: **the semantic gap**. This problem arises from the multi-tier "
-    "process of translating high-level, subjective legislation into binary, deterministic software logic."
-    "To build a maintainable compliance validation system, engineering teams must not interpret "
-    "legislation directly. Instead, organizations must decouple the process into three distinct layers: " \
-    "**The Three-Tier PaC Translation Framework**."
 )
 
 st.divider()
-col1, col2, col3 = st.columns(3)
+
+# --------------------------------------------------
+# INSPECTR
+# --------------------------------------------------
+
+st.subheader("Where InspectR Operates")
+
+st.markdown(
+    """
+    InspectR starts from **defined organisational policy conditions** and evaluates
+    their observable representation in a pipeline blueprint.
+
+    **InspectR does not perform legal interpretation.**
+    It operationalises explicit policy conditions as testable design-time controls.
+    """
+)
+
+st.code(
+    """Policy condition
+      ↓
+Evidence requirement
+      ↓
+Blueprint evidence ──→ Rego rule
+                         ↓
+                        OPA
+                         ↓
+                  OK / FAIL / HUMAN""",
+    language="text",
+)
+
+st.divider()
+
+# --------------------------------------------------
+# AUTOMATION BOUNDARY
+# --------------------------------------------------
+
+st.subheader("Automation Boundary")
+
+col1, col2 = st.columns(2, gap="large")
 
 with col1:
-    st.subheader("Tier 1: Regulation")
     st.markdown(
-        "**Source:** Sovereign Governments\n\n"
-        "**Nature:** Subjective, intentionally fuzzy, and flexible. "
-        "Written to accommodate future advancements and contextual application.\n\n"
-        "**Example:** GDPR Article 5 mandates *'appropriate technical and organizational measures'* "
-        "to secure personal data."
+        """
+        **Software can evaluate**
+
+        Explicit evidence against explicit conditions.
+        """
     )
 
 with col2:
-    st.subheader("Tier 2: Policy")
     st.markdown(
-        "**Source:** Corporate Governance & Legal\n\n"
-        "**Nature:** Interpretative and contextual. Converts legal ambiguity into "
-        "concrete organizational mandates and architecture baselines.\n\n"
-        "**Example:** *'To satisfy GDPR Article 5, all data pipelines processing personally identifiable "
-        "information (PII) must utilize AES-256 at-rest encryption.'*"
+        """
+        **Software cannot establish**
+
+        The legal meaning, completeness, or correctness
+        of the policy interpretation itself.
+        """
     )
 
-with col3:
-    st.subheader("Tier 3: Engineering PaC")
-    st.markdown(
-        "**Source:** Platform & Security DevOps\n\n"
-        "**Nature:** Deterministic, literal, and binary. Assesses structured data configurations "
-        "against static assertions to yield a strict pass or fail output.\n\n"
-        "**Example:** A Rego policy validating that a JSON blueprint sets the flag "
-        "`encryption_at_rest` to true."
-    )
-
-st.divider()
-
-# Concrete Code Breakdown
-st.header("Concrete Implementation Example")
-st.markdown(
-    "Below is a demonstration of how a data pipeline blueprint is automatically audited against "
-    "the Tier 2 internal corporate interpretation of the EU AI Act."
+st.info(
+    "A deterministic result is only as valid as the policy interpretation, "
+    "evidence model, and input evidence on which it depends."
 )
-
-code_col1, code_col2 = st.columns(2)
-
-with code_col1:
-    st.subheader("Data Pipeline Blueprint (input.json)")
-    st.markdown("This metadata block describes the architectural traits of a newly deployed data pipeline.")
-    json_example = """{
-  "pipeline_name": "hr_resume_screening_ai",
-  "ai_system": {
-    "use_case": "employment_recruitment",
-    "risk_classification": "high",
-    "logging_enabled": false,
-    "has_human_in_the_loop": true
-  }
-}"""
-    st.code(json_example, language="json")
-    # Core Friction Points
-    st.header("Core Operational Friction Points")
-
-    st.info(
-        "1. **The Context Vacuum:** OPA cannot inspect business intent or evaluate subjective clauses like "
-        "'legitimate interest'. It can only assert against declared structural attributes provided in the metadata input.\n"
-        "2. **Garbage In, Garbage Out:** The enforcement model is entirely dependent on the integrity of the data blueprint. "
-        "If engineers categorize data fields incorrectly or intentionally obfuscate high-risk variables, the tool will generate false compliance assurances.\n"
-        "3. **Regulatory Evolution:** Court rulings, guidelines, and regulatory frameworks frequently change. "
-        "This necessitates an explicit lifecycle update mechanism where legal mutations systematically trigger policy modifications at the code tier."
-    )
-
-with code_col2:
-    st.subheader("Rego Compliance Policy (aiact.rego)")
-    st.markdown("The OPA rules compile corporate policy into binary logic while embedding legal traceability.")
-    rego_example = """package compliance.aiact
-
-default allow = false
-
-allow if count(deny) == 0
-
-# Rule: High-Risk AI systems (Annex III) require automated logging (Art. 12)
-deny[compliance_error] {
-    input.ai_system.risk_classification == "high"
-    input.ai_system.logging_enabled == false
-    
-    compliance_error := {
-        "status": "FAIL",
-        "rule_id": "SEC-AI-012",
-        "message": "High-risk AI pipeline missing automated logging framework.",
-        "traceability": {
-            "internal_policy": "Corporate AI Governance Standard v2.1 (Section 4.2)",
-            "regulation_reference": "EU AI Act - Article 12 (Logging)"
-        }
-    }
-}"""
-    st.code(rego_example, language="rego")
-
-st.divider()

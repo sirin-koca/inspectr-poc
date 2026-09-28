@@ -1,78 +1,101 @@
 import streamlit as st
 
 st.title("InspectR")
-st.caption("Policy-as-Code for design-time pipeline inspection")
+st.caption("**Proof of concept** Compliance automation engine for data pipelines")
+
+st.image("images/main.png", use_container_width=True)
+
+st.divider()
+
+# --------------------------------------------------
+# OVERVIEW
+#What is InspectR?
+#Why is it needed?
+#What is the TK case?
+#How does the architecture work?
+#What rules are active?
+#Can it run?
+#What is the research contribution?
+# --------------------------------------------------
+
+st.subheader("Compliance Engine Logic")
+
+st.code(
+    """Organisational Policy
+        ↓
+Required Design-Time Evidence
+        ↓
+Pipeline Blueprint
+        +
+Policy-as-Code (Rego)
+        ↓
+Open Policy Agent (OPA)
+        ↓
+OK / FAIL / HUMAN
+        ↓
+Evidence · Reason · Rule Reference · Remedy""",
+    language="text",
+)
+
+st.caption(
+    "Blueprint = evidence · Policy = conditions · "
+    "Rego = executable policy · OPA = evaluator"
+)
+
+st.divider()
+
+# --------------------------------------------------
+# SEMANTIC GAP
+# --------------------------------------------------
+
+st.subheader("The Semantic Gap")
 
 st.markdown(
     """
-    InspectR is a proof-of-concept architecture for translating selected
-    regulatory and governance requirements into explainable, machine-checkable
-    policy findings over a static data-pipeline blueprint.
+    **Compliance requirements are contextual. Software logic is deterministic.**
+
+    Policy-as-Code bridges this gap by translating defined organisational
+    policy conditions into executable rules that can be evaluated against
+    explicit pipeline evidence.
     """
 )
 
-st.image("images/main.png", width=1000)
+st.code(
+    "Policy requirement → Evidence requirement → Rego rule → OPA evaluation",
+    language="text",
+)
+
 st.divider()
+
+# --------------------------------------------------
+# POC BOUNDARY
+# --------------------------------------------------
+
+st.subheader("PoC Boundary")
 
 col1, col2 = st.columns(2, gap="large")
 
 with col1:
-    st.subheader("What this PoC demonstrates")
     st.markdown(
         """
-        - A pipeline blueprint provides design-time evidence.
-        - Policy is kept outside the Python application.
-        - OPA evaluates Rego independently of the UI.
-        - InspectR explains each result with evidence, reason, and remedy.
+        **This PoC**
+
+        - TK/MUNDAT use case
+        - Static inLUMEN JSON blueprint
+        - Rego Policy-as-Code
+        - OPA evaluation
+        - Design-time inspection
         """
     )
 
 with col2:
-    st.subheader("What InspectR does not claim")
     st.markdown(
         """
-        InspectR does not certify compliance, encode the law directly, or
-        replace legal interpretation. It evaluates whether declared evidence
-        satisfies an explicitly defined organizational policy.
+        **Not claimed**
+
+        - Legal compliance certification
+        - Runtime verification
+        - Automated legal interpretation
+        - Intermediate Representation (IR)
         """
     )
-
-st.divider()
-
-st.subheader("The semantic gap")
-st.markdown(
-    """
-    Regulation is broad, contextual, and open to interpretation. Rego is
-    deterministic and can evaluate only explicit data. The central research
-    problem is therefore the translation between them:
-    """
-)
-st.code(
-    "Regulatory requirement\n"
-    "        ↓\n"
-    "Organizational interpretation\n"
-    "        ↓\n"
-    "Required blueprint evidence\n"
-    "        ↓\n"
-    "Policy-as-Code in Rego\n"
-    "        ↓\n"
-    "OK / FAIL / HUMAN",
-    language="text",
-)
-
-st.subheader("The generalization challenge")
-st.markdown(
-    """
-    InspectR must remain a generic engine. Organizations should be able to
-    provide their own policy definitions without hard-coding every policy into
-    InspectR itself. This PoC uses the TK/MUNDAT policy as a concrete test case
-    to demonstrate the architecture; a reusable policy-pack or policy-profile
-    mechanism belongs to the future InspectR architecture.
-    """
-)
-
-st.info(
-    "Current boundary: the TK/MUNDAT blueprint is evaluated directly by OPA/Rego. "
-    "No Intermediate Representation is implemented in this PoC."
-)
-
