@@ -10,6 +10,38 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
 )
+# --------------------------------------------------
+# THE ONE GLOBAL CSS BLOCK 
+#    (app-wide tweaks)
+# --------------------------------------------------
+st.markdown(
+    """
+    <style>
+    /* 1. Makes the navigation menu text bigger */
+    [data-testid="stSidebarNavItems"] span {
+        font-size: 1.1rem !important; 
+    }
+    [data-testid="stSidebarNavItems"] svg {
+        transform: scale(1.1); 
+    }
+
+    /* 2. Diasable top space/padding on every page */
+    section.stMain .block-container {
+        padding-top: 10px !important; 
+        padding-bottom: 1rem !important;
+    }
+
+    /* 3. Custom reusable class for markdown background fields */
+    .custom-card {
+        background-color: #f0f2f6; 
+        padding: 15px; 
+        border-radius: 8px; 
+        color: #31333F;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # --------------------------------------------------
 # SESSION STATE
@@ -32,20 +64,23 @@ pages = [
     st.Page("pages/main.py", title=":: InspectR", default=True),
     st.Page("pages/overview.py", title=":: Overview"),
     st.Page("pages/pac.py", title=":: Engineering PaC"),
-    st.Page("pages/gap.py", title=":: The Semantic Gap"),
     st.Page("pages/tk_uc.py", title=":: Use Case"),
     st.Page("pages/research.py", title=":: Research"),
     st.Page("pages/taxonomy.py", title=":: Taxonomy"),
     st.Page("pages/architecture.py", title=":: Architecture"),
     st.Page("pages/evaluation.py", title=":: Evaluation"),
-    st.Page("pages/test.py", title=":: Test"),
+    st.Page("pages/about.py", title=":: About"),
 ]
 
 pg = st.navigation(pages)
 
 st.sidebar.image(
     "images/datapact-logo.png",
-    width=140
+    width=140,
+)
+st.sidebar.image(
+    "images/uio.png",
+    width=150,
 )
 # --------------------------------------------------
 # GLOBAL FOOTER
@@ -58,14 +93,14 @@ st.markdown(
         position: fixed;
         bottom: 20px;
         left: 270px;
-        color: #8a8a8a;
+        color: magenta;
         font-size: 0.85rem;
         z-index: 999;
     }
     </style>
 
     <div class="inspectr-footer">
-        InspectR PoC — Architecting a Compliance Engine for Multi-Agent Data Pipeline Ecosystems
+        InspectR PoC 
     </div>
     """,
     unsafe_allow_html=True,

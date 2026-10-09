@@ -1,5 +1,5 @@
 {
-  "schema_version": "inlumen.project@2",
+  "schema_version": "inlumen.project@2 - TEST 2",
   "project": {
     "name": "Trondheim Kommune MUNDAT Case",
     "description": "Accurate 7-stage data-sharing compliance flow enriched with compliance metadata extensions.",

@@ -1,69 +1,9 @@
+import streamlit as st
 import pandas as pd
 import plotly.express as px
-import streamlit as st
-
-# --------------------------------------------------
-# PAGE CONFIGURATION
-# --------------------------------------------------
-
-st.set_page_config(page_title="InspectR Taxonomy Explorer", layout="wide")
-
-st.popover(
-    "About this taxonomy",
-).write(
-    """
-    Machine-readable compliance taxonomy used by the InspectR PoC - TK Use Case.
-
-    The InspectR taxonomy provides a structured overview of compliance concepts relevant to the PoC.
-    It organizes the current problem space across the TK use case, pipeline structure, and selected 
-    EU AI Act concepts. 
-    
-    The taxonomy supports analysis and rule development, and it is not evaluated directly by the InspectR engine.
-    """
-)
-# -------------------------
-# TAXONOMY SUMMARY TABLE
-# -------------------------
-overview_df = pd.DataFrame([
-    {
-        "Level": "Domain",
-        "Meaning": "High-level compliance concern/category",
-        "Example": "Data Governance",
-    },
-    {
-        "Level": "Dimension",
-        "Meaning": "Specific aspect within a domain",
-        "Example": "Data Categories",
-    },
-    {
-        "Level": "Atomic Element",
-        "Meaning": "Concrete concept that can be evaluated",
-        "Example": "Personal Data",
-    },
-    {
-        "Level": "Constraint",
-        "Meaning": "Machine-checkable requirement attached to the element",
-        "Example": "Data Minimisation",
-    },
-    {
-        "Level": "Rule Metadata",
-        "Meaning": "Information used to execute and explain the constraint",
-        "Example": "Logic, severity, message, regulatory reference",
-    },
-])
-
-st.dataframe(
-    overview_df,
-    use_container_width=True,
-    hide_index=True,
-)
-
 import json
 from pathlib import Path
 
-import pandas as pd
-import plotly.express as px
-import streamlit as st
 
 # --------------------------------------------------
 # LOAD TAXONOMY
@@ -73,7 +13,6 @@ TAXONOMY_PATH = Path("data/inspectr_taxonomy.json")
 
 with open(TAXONOMY_PATH, "r", encoding="utf-8") as file:
     taxonomy = json.load(file)
-
 
 # --------------------------------------------------
 # CONVERT JSON TREE TO PLOTLY DATA
@@ -86,6 +25,8 @@ descriptions = []
 colors = []
 rule_ids = []
 evidence_fields = []
+legal_references = []
+relationships = []
 
 
 def flatten_taxonomy(node, parent="", inherited_color="dodgerblue"):
@@ -99,6 +40,8 @@ def flatten_taxonomy(node, parent="", inherited_color="dodgerblue"):
     colors.append(current_color)
     rule_ids.append(node.get("rule_id", ""))
     evidence_fields.append(", ".join(node.get("evidence_fields", [])))
+    legal_references.append(", ".join(node.get("legal_references", [])))
+    relationships.append(node.get("relationship", ""))
 
     for child in node.get("children", []):
         flatten_taxonomy(
@@ -124,10 +67,11 @@ fig = px.icicle(
         descriptions,
         rule_ids,
         evidence_fields,
+        legal_references,
+        relationships,
     ],
-    title="InspectR PoC Taxonomy",
+    title="TK/MUNDAT GDPR Compliance Scope",
 )
-
 
 fig.update_traces(
     marker=dict(colors=colors),
@@ -136,7 +80,9 @@ fig.update_traces(
         "<b>Level:</b> %{customdata[0]}<br>"
         "<b>Description:</b> %{customdata[1]}<br>"
         "<b>Rule:</b> %{customdata[2]}<br>"
-        "<b>Evidence:</b> %{customdata[3]}"
+        "<b>Evidence:</b> %{customdata[3]}<br>"
+        "<b>GDPR basis:</b> %{customdata[4]}<br>"
+        "<b>Relationship:</b> %{customdata[5]}"
         "<extra></extra>"
     ),
     textinfo="label",
@@ -144,7 +90,7 @@ fig.update_traces(
 
 
 fig.update_layout(
-    margin=dict(t=50, l=0, r=0, b=0),
+    margin=dict(t=80, l=0, r=0, b=0),
     font=dict(size=16),
     title_font=dict(size=26),
 )
@@ -153,4 +99,65 @@ fig.update_layout(
 st.plotly_chart(
     fig,
     use_container_width=True,
+)
+
+st.popover(
+    "About this taxonomy",
+).write(
+    """
+    Machine-readable compliance taxonomy used by the InspectR PoC for the
+    TK/MUNDAT GDPR Compliance Scope.
+
+    The taxonomy is organised by the selected legal basis: GDPR Articles 25,
+    30, and 35. Each article branch contains a TK/MUNDAT operational
+    interpretation, an executable constraint where available, and the
+    blueprint evidence used by InspectR.
+
+    The governance branch contains a TK/MUNDAT safeguard that supports the
+    use case but is not presented as a standalone GDPR article implementation.
+
+    These are limited design-time operational proxies. They do not establish
+    legal compliance with the GDPR as a whole.
+    """
+)
+# -------------------------
+# TAXONOMY SUMMARY TABLE
+# -------------------------
+overview_df = pd.DataFrame([
+    {
+        "Level": "Root",
+        "Meaning": "Selected TK/MUNDAT regulatory scope",
+        "Example": "TK/MUNDAT GDPR Compliance Scope",
+    },
+    {
+        "Level": "Domain",
+        "Meaning": "Selected GDPR article or TK governance category",
+        "Example": "GDPR Article 25",
+    },
+    {
+        "Level": "Dimension",
+        "Meaning": "TK/MUNDAT operational interpretation",
+        "Example": "Processing Traceability",
+    },
+    {
+        "Level": "Atomic Element",
+        "Meaning": "Observable concept or blueprint property",
+        "Example": "Required TK Pipeline Stages",
+    },
+    {
+        "Level": "Constraint",
+        "Meaning": "Machine-checkable requirement attached to the blueprint",
+        "Example": "Required Intake-to-Output Flow",
+    },
+    {
+        "Level": "Rule metadata",
+        "Meaning": "Rule ID, evidence fields, legal basis, and relationship type",
+        "Example": "TK-TRACE-01; compliance_extensions.has_logging",
+    },
+])
+
+st.dataframe(
+    overview_df,
+    use_container_width=True,
+    hide_index=True,
 )

@@ -1,60 +1,92 @@
 import streamlit as st
+# --------------------------------------------------
+# 1. APP CONFIGURATION 
+# -------------------------------------------------
+
+# --------------------------------------------------
+# 2. THE ONE GLOBAL CSS BLOCK TO RULE THEM ALL
+#    (Put all your app-wide tweaks right here!)
+# --------------------------------------------------
+st.markdown(
+    """
+    <style>
+    /* A. Makes the navigation menu text bigger */
+    [data-testid="stSidebarNavItems"] span {
+        font-size: 1.15rem !important; 
+    }
+    [data-testid="stSidebarNavItems"] svg {
+        transform: scale(1.1); 
+    }
+
+    /* B. Destroys the annoying default top space/padding on every page */
+    section.stMain .block-container {
+        padding-top: 1rem !important; 
+        padding-bottom: 1rem !important;
+    }
+
+    /* C. Custom reusable class for your markdown background fields */
+    .custom-card {
+        background-color: #f0f2f6; 
+        padding: 15px; 
+        border-radius: 8px; 
+        color: #31333F;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 
 st.title("InspectR Architecture")
 
 st.warning(
     "This PoC deliberately evaluates the inLUMEN JSON blueprint directly. "
-    "No Intermediate Representation (IR) is implemented, to keep the architecture small and testable."
+    "No Intermediate Representation (IR) is implemented for KISS purposes."
 )
 
-st.markdown(
-    """
-    ### Four separated concerns
+st.image(
+    "images/arch-inspectr.jpeg",
+    caption="InspectR",
+)
 
-    1. **Blueprint** - the TK/MUNDAT pipeline and declared evidence.
+col1, col2 = st.columns([1, 1])
+
+with col1:
+    st.markdown(
+    """
+    ### Why this architecture?
+
+    1. **Blueprint** - the pipeline topology: the TK/MUNDAT pipeline and declared evidence.
     2. **Policy** - the operational interpretation encoded in Rego.
-    3. **Decision engine** - OPA evaluates the policy independently.
-    4. **Application** - Streamlit orchestrates input and explains results.
+    3. **Decision engine** - InspectR utilizing OPA evaluates the policy independently from the application logic.
+    4. **Evaluation** - InspectR reports the decision and evidence to the user - optionally triggers the agentic work-flow for self-correction.
+
+    - Decoupling Blueprint from Logic: Heterogeneous data pipeline artifacts are parsed into a Unified Graph Intermediate Representation (IR). 
+    Rego policies evaluate the Graph IR, not raw code. This makes IncspectR vendor-agnostic and scalable. 
+    - Shift-Left Compliance: Catching non-compliance at design-time (CI/CD / pull request phase) prevents 
+    costly runtime compliance failures and data contamination. 
+    - Tri-State Output (OK / FAIL / HUMAN): Standard linters offer binary true/false decisions. 
+    Real-world compliance requires handling ambiguity by routing complex legal edge cases to human compliance 
+    officers (HUMAN). 
     """
 )
 
-st.code(
-    """TK/MUNDAT JSON blueprint
-        |
-        | nodes, connections, compliance_extensions
-        v
-Python evaluator
-        |
-        +-- policy.rego
-        v
-OPA query: data.inspectr.results
-        |
-        v
-OK / FAIL / HUMAN + evidence + reason + remedy""",
-    language="text",
-)
-
-st.image(
-    "images/arch.png",
-    caption="InspectR PoC architecture: direct blueprint evaluation without IR",
-    width=1100,
-)
-
-st.info(
-    "The future InspectR architecture may introduce an Intermediate Representation. "
-    "That is intentionally outside this PoC boundary."
-)
-import streamlit as st
-
-st.subheader("InspectR Architecture")
-
-st.warning(
-    "The PoC scope evaluates the JSON pipeline blueprint directly. "
-    "No Intermediate Representation (IR) is implemented."
-)
-
-st.image(
-    "images/arch-2.png",
-    caption="InspectR Architecture",
-    width=1100,
-)
+with col2:
+    st.code(
+            """
+            LAW
+                1. GDPR provision: Use Case TK 
+                2. AIA: Use Case X 
+            ↓
+            Policy (Organisational requirements)
+            ↓
+            Observable evidence in the blueprint
+            ↓
+            Executable PaC rule
+            ↓
+            Evaluation: InspectR Engine
+            ↓
+            OK/FAIL/HUMAN
+            """,
+            language="text",                    
+)  

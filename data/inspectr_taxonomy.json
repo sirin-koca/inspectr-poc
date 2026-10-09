@@ -1,175 +1,58 @@
 {
-  "id": "InspectR.Taxonomy",
-  "label": "InspectR",
+  "id": "TK.MUNDAT.GDPRScope",
+  "label": "TK/MUNDAT GDPR Compliance Scope",
   "level": "Root",
-  "description": "Root of InspectR taxonomy",
+  "description": "Selected GDPR requirements operationalised for the Trondheim Kommune MUNDAT data-sharing proof of concept",
+  "scope": "PoC",
   "children": [
     {
-      "id": "TK.PipelineStructure",
-      "label": "TK Pipeline Structure",
+      "id": "GDPR.Art25",
+      "label": "GDPR Article 25",
       "level": "Domain",
-      "description": "Structural pipeline requirements",
+      "description": "Data protection by design and by default, represented through selected TK pipeline safeguards",
+      "legal_references": ["GDPR Art. 25"],
       "color": "#FF77DC",
       "children": [
         {
-          "id": "TK.PipelineStructure.MandatoryStages",
-          "label": "Mandatory Stages",
+          "id": "GDPR.Art25.PipelineDesign",
+          "label": "Privacy-by-Design Pipeline Structure",
           "level": "Dimension",
-          "description": "Stages that MUST exist in TK pipeline",
+          "description": "The TK workflow includes explicit stages in which compliance-relevant safeguards can be represented",
           "children": [
             {
-              "id": "TK.Stage.Intake",
-              "label": "Intake",
+              "id": "TK.PipelineStages",
+              "label": "Required TK Pipeline Stages",
               "level": "Atomic Element",
-              "description": "Request intake stage"
+              "description": "Intake, validation, retrieval, preparation, compliance checks, decision support, and output delivery",
+              "evidence_fields": ["pipeline.nodes"]
             },
-            {
-              "id": "TK.Stage.Validation",
-              "label": "Validation",
-              "level": "Atomic Element",
-              "description": "Request validation stage"
-            },
-            {
-              "id": "TK.Stage.DataRetrieval",
-              "label": "Data Retrieval",
-              "level": "Atomic Element",
-              "description": "Data retrieval stage"
-            },
-            {
-              "id": "TK.Stage.CompliancePreparation",
-              "label": "Compliance Preparation",
-              "level": "Atomic Element",
-              "description": "Compliance preparation stage"
-            },
-            {
-              "id": "TK.Stage.ComplianceChecks",
-              "label": "Compliance Checks",
-              "level": "Atomic Element",
-              "description": "Compliance checks stage"
-            },
-            {
-              "id": "TK.Stage.DecisionSupport",
-              "label": "Decision Support",
-              "level": "Atomic Element",
-              "description": "Decision support stage"
-            },
-            {
-              "id": "TK.Stage.OutputDelivery",
-              "label": "Output Delivery",
-              "level": "Atomic Element",
-              "description": "Output delivery stage"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "TK.ComplianceRequirements",
-      "label": "Compliance Requirements (TK UC)",
-      "level": "Domain",
-      "description": "Compliance requirements from TK UC",
-      "color": "#FDB033",
-      "children": [
-        {
-          "id": "TK.MetadataCompleteness",
-          "label": "Metadata Completeness",
-          "level": "Dimension",
-          "description": "Metadata completeness checks",
-          "children": [
-            {
-              "id": "TK.RequestMetadata",
-              "label": "Request Metadata",
-              "level": "Atomic Element",
-              "description": "Request metadata must be complete"
-            }
-          ]
-        },
-        {
-          "id": "TK.LawfulDataRetrieval",
-          "label": "Lawful Data Retrieval",
-          "level": "Dimension",
-          "description": "Lawful data retrieval constraints",
-          "children": [
-            {
-              "id": "TK.NecessaryDataOnly",
-              "label": "Necessary Data Only",
-              "level": "Atomic Element",
-              "description": "Only necessary data may be retrieved"
-            }
-          ]
-        },
-        {
-          "id": "TK.DPIARiskAssessment",
-          "label": "DPIA & Risk Assessment",
-          "level": "Dimension",
-          "description": "DPIA and risk assessment requirements",
-          "children": [
-            {
-              "id": "TK.RiskChecksPresent",
-              "label": "Risk Checks Present",
-              "level": "Atomic Element",
-              "description": "Risk checks must be present"
-            }
-          ]
-        },
-        {
-          "id": "TK.HumanOversight",
-          "label": "Human Oversight",
-          "level": "Dimension",
-          "description": "Human oversight requirements",
-          "children": [
-            {
-              "id": "TK.HumanReviewBeforeSharing",
-              "label": "Human Review Before Sharing",
-              "level": "Atomic Element",
-              "description": "Human review required before sharing"
-            }
-          ]
-        },
-        {
-          "id": "TK.LoggingTraceability",
-          "label": "Logging & Traceability",
-          "level": "Dimension",
-          "description": "Logging and traceability requirements",
-          "children": [
-            {
-              "id": "TK.LoggingEnabled",
-              "label": "Logging Enabled",
-              "level": "Atomic Element",
-              "description": "Logging must be enabled"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "TK.MUNDATRequirements",
-      "label": "MUNDAT Data-Sharing Requirements",
-      "level": "Domain",
-      "description": "Design-time requirements derived from the Trondheim Kommune MUNDAT data-sharing use case",
-      "color": "#2E86AB",
-      "children": [
-        {
-          "id": "TK.MUNDAT.Structure",
-          "label": "Pipeline Structure",
-          "level": "Dimension",
-          "description": "The documented stages and order of the TK compliance flow",
-          "children": [
             {
               "id": "Constraint.TK.RequiredFlow",
               "label": "Required Intake-to-Output Flow",
               "level": "Constraint",
               "description": "The blueprint contains the seven documented stages in the expected order",
               "rule_id": "TK-STRUCT-01",
+              "legal_references": ["GDPR Art. 25"],
+              "relationship": "supporting operational proxy",
               "evidence_fields": ["pipeline.nodes", "pipeline.connections"]
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "GDPR.Art30",
+      "label": "GDPR Article 30",
+      "level": "Domain",
+      "description": "Processing provenance and traceability, represented through selected TK blueprint metadata",
+      "legal_references": ["GDPR Art. 30"],
+      "color": "#FDB033",
+      "children": [
         {
-          "id": "TK.MUNDAT.DataSources",
-          "label": "Data Sources and Provenance",
+          "id": "GDPR.Art30.Provenance",
+          "label": "Processing Provenance",
           "level": "Dimension",
-          "description": "Sources used to assemble a requested dataset must be identifiable and approved",
+          "description": "Sources used to assemble a requested dataset are identifiable and approved",
           "children": [
             {
               "id": "Constraint.TK.SourceProvenance",
@@ -177,31 +60,17 @@
               "level": "Constraint",
               "description": "Each source declares a source identifier and approval status",
               "rule_id": "TK-DATA-01",
+              "legal_references": ["GDPR Art. 30"],
+              "relationship": "partial operational support",
               "evidence_fields": ["compliance_extensions.source_id", "compliance_extensions.approved_source"]
             }
           ]
         },
         {
-          "id": "TK.MUNDAT.RiskAssessment",
-          "label": "DPIA and Risk Assessment",
+          "id": "GDPR.Art30.Traceability",
+          "label": "Processing Traceability",
           "level": "Dimension",
-          "description": "Compliance and risk checks occur during the data-sharing flow",
-          "children": [
-            {
-              "id": "Constraint.TK.RiskChecks",
-              "label": "Compliance and Risk Checks",
-              "level": "Constraint",
-              "description": "The pipeline contains a dedicated stage for compliance, DPIA, and obligation checks",
-              "rule_id": "TK-RISK-01",
-              "evidence_fields": ["pipeline.nodes.label"]
-            }
-          ]
-        },
-        {
-          "id": "TK.MUNDAT.Traceability",
-          "label": "Logging and Traceability",
-          "level": "Dimension",
-          "description": "The request, data access, checks, and sharing decision should be traceable",
+          "description": "The request, data access, checks, and sharing decision are represented as traceable pipeline activity",
           "children": [
             {
               "id": "Constraint.TK.Logging",
@@ -209,10 +78,49 @@
               "level": "Constraint",
               "description": "Every pipeline stage declares logging capability",
               "rule_id": "TK-TRACE-01",
+              "legal_references": ["GDPR Art. 30"],
+              "relationship": "partial operational support",
               "evidence_fields": ["compliance_extensions.has_logging"]
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "id": "GDPR.Art35",
+      "label": "GDPR Article 35",
+      "level": "Domain",
+      "description": "DPIA and risk-assessment requirements, represented through a design-time checkpoint",
+      "legal_references": ["GDPR Art. 35"],
+      "color": "#2E86AB",
+      "children": [
+        {
+          "id": "GDPR.Art35.RiskAssessment",
+          "label": "DPIA and Risk Assessment",
+          "level": "Dimension",
+          "description": "The data-sharing flow contains a dedicated stage for compliance, DPIA, and risk checks",
+          "children": [
+            {
+              "id": "Constraint.TK.RiskChecks",
+              "label": "Compliance and Risk Checks",
+              "level": "Constraint",
+              "description": "The pipeline contains a dedicated stage for compliance, DPIA, and obligation checks",
+              "rule_id": "TK-RISK-01",
+              "legal_references": ["GDPR Art. 35"],
+              "relationship": "checkpoint-presence proxy",
+              "evidence_fields": ["pipeline.nodes.label"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "TK.MUNDAT.GovernanceSafeguards",
+      "label": "TK/MUNDAT Governance Safeguards",
+      "level": "Domain",
+      "description": "Use-case governance safeguards selected for the PoC and not presented as standalone GDPR article implementations",
+      "color": "#7A7A7A",
+      "children": [
         {
           "id": "TK.MUNDAT.SharingDecision",
           "label": "Sharing Decision",
@@ -225,6 +133,7 @@
               "level": "Constraint",
               "description": "The sharing decision stage declares a human review or override checkpoint",
               "rule_id": "TK-HUMAN-01",
+              "relationship": "TK/MUNDAT governance safeguard",
               "evidence_fields": ["compliance_extensions.human_oversight"]
             }
           ]

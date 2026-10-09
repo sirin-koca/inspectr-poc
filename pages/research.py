@@ -1,53 +1,174 @@
 import streamlit as st
 
-st.title("Research")
 
-st.info("""
-    PROBLEM & METHOD:
+st.subheader("Research")
 
-    Core research problem: How do we translate contextual requirements into deterministic policy?
-    PoC: Can this work directly on one TK/inLUMEN blueprint?
-    Future architecture:How can the same method work across organizations and blueprint formats?
-    IR:One mechanism for achieving that future generalization.
-    "InspectR investigates the semantic gap between complex regulatory or governance "
-    "requirements and deterministic software logic. The TK/MUNDAT pipeline is the concrete "
-    "case used to test the architecture and Policy-as-Code method.
-    """
-)
-st.markdown("#### Research Questions")
-st.write(
-    """
-    1. **RQ1 — Design-Time Compliance**: What compliance-relevant conclusions can be reliably derived from a static pipeline blueprint without access to runtime data or execution behaviour?
-    2. **RQ2 — Rule Codification**: How can selected regulatory requirements be translated into machine-readable Policy-as-Code rules that can be evaluated against pipeline designs?
-    3. **RQ3 — Rule Applicability**: How can InspectR determine which Policy-as-Code rules and compliance checkpoints are applicable to specific operations in a pipeline blueprint?
-    4. **RQ4 — Evidence Sufficiency**: What design-time evidence must a pipeline blueprint provide for InspectR to evaluate an applicable rule, and how should insufficient evidence be handled?
-    5. **RQ5 — Blueprint Requirements**: Which compliance-relevant information is already available in the inLUMEN blueprint, and what additional information must be explicitly represented to support reliable compliance inspection?
-    """
-)
-
-st.header("Contribution under investigation")
-st.write(
-    "InspectR demonstrates an architecture and operational method for translating selected "
-    "regulatory and governance requirements into explainable Policy-as-Code checks over static data-pipeline blueprints."
-)
-
-st.header("Evidence for the claim")
 st.markdown(
     """
-    - Policy is separated from Python application logic.
-    - OPA independently evaluates Rego against blueprint evidence.
-    - Each rule exposes its interpretation, evidence, result, and remedy.
-    - `OK`, `FAIL`, and `HUMAN` distinguish satisfied, negative, and insufficient evidence.
-    - The same blueprint produces repeatable results.
-    - Limitations and alternative interpretations are documented.
+    Regulatory and organisational requirements are often expressed in
+    qualitative, context-dependent language, while software systems require
+    explicit conditions and observable evidence. This research investigates
+    how selected requirements can be operationalised for design-time
+    compliance assessment of data-pipeline blueprints.
     """
 )
 
-st.warning(
-    "Novelty is a research question, not an assumption. " \
-    "OPA and Policy-as-Code are established technologies; "
-    "the thesis must position the InspectR combination against " \
-    "related work."
+st.info(
+    """
+    **Research problem**
+
+    How can contextual requirements be transformed into explicit,
+    evidence-bound, machine-assessable controls without losing their meaning,
+    scope, uncertainty, or limitations?
+    """
 )
 
+# ---------------------------------------------------------------------
+# RESEARCH APPROACH
+# ---------------------------------------------------------------------
 
+st.markdown("#### Research Approach")
+
+st.write(
+    "This project follows a **Design Science Research (DSR)** approach. "
+    "It addresses a practical problem by designing and evaluating an artifact, "
+    "while also producing transferable design knowledge."
+)
+
+dsr_steps = [
+    ("1. Problem", "Identify the gap between contextual requirements and machine-assessable controls."),
+    ("2. Objectives", "Define requirements for evidence, traceability, explainability, and uncertainty."),
+    ("3. Design", "Construct the artifact, operational rules, evidence model, and result model."),
+    ("4. Demonstration", "Apply the artifact to the bounded TK/MUNDAT GDPR case study."),
+    ("5. Evaluation", "Assess coverage, repeatability, explainability, and limitations."),
+    ("6. Knowledge", "Document design principles and conditions for transfer beyond the case."),
+]
+
+for row in range(0, len(dsr_steps), 3):
+    columns = st.columns(3)
+    for column, (title, description) in zip(columns, dsr_steps[row : row + 3]):
+        with column:
+            with st.container(border=True):
+                st.markdown(f"**{title}**")
+                st.caption(description)
+
+# ---------------------------------------------------------------------
+# RESEARCH QUESTIONS
+# ---------------------------------------------------------------------
+
+st.markdown("#### Research Questions")
+
+questions = [
+    (
+        "RQ1 — Requirement operationalisation",
+        "How can context-dependent regulatory requirements be operationalised "
+        "into machine-assessable policy specifications while preserving their "
+        "meaning and scope?",
+    ),
+    (
+        "RQ2 — Evidence and explainability",
+        "What evidence model supports explainable and defensible design-time "
+        "compliance assessment across heterogeneous data-pipeline representations?",
+    ),
+    (
+        "RQ3 — Uncertainty and validity",
+        "How can uncertainty and insufficient evidence be represented, and how "
+        "can the validity and usefulness of automated assessment results be evaluated?",
+    ),
+]
+
+columns = st.columns(3)
+for column, (title, question) in zip(columns, questions):
+    with column:
+        with st.container(border=True):
+            st.markdown(f"**{title}**")
+            st.write(question)
+
+# ---------------------------------------------------------------------
+# METHOD AND CASE STUDY
+# ---------------------------------------------------------------------
+
+with st.expander("How the method is investigated", expanded=True):
+    left, right = st.columns(2)
+
+    with left:
+        st.markdown("**Design and development**")
+        st.markdown(
+            """
+            1. Identify a contextual regulatory or organisational requirement.
+            2. Define its operational interpretation and scope.
+            3. Specify the evidence required in a static pipeline blueprint.
+            4. Encode the interpretation as an explainable Policy-as-Code rule.
+            """
+        )
+
+    with right:
+        st.markdown("**Demonstration and evaluation**")
+        st.markdown(
+            """
+            1. Apply the artifact to a bounded pipeline case.
+            2. Inspect positive, negative, and incomplete evidence.
+            3. Analyse results, explanations, repeatability, and limitations.
+            """
+        )
+
+with st.expander("Role of the TK/MUNDAT case study"):
+    st.write(
+        "The TK/MUNDAT data-sharing scenario is the bounded empirical case "
+        "used to investigate the general research problem. The PoC uses selected "
+        "GDPR Articles 25, 30, and 35 and a simplified inLUMEN pipeline blueprint."
+    )
+    st.caption(
+        "The case study demonstrates the method; it does not define the scope "
+        "of the research questions."
+    )
+
+# ---------------------------------------------------------------------
+# CONTRIBUTION AND EVALUATION BASIS
+# ---------------------------------------------------------------------
+
+with st.expander("Contribution under investigation", expanded=True):
+    st.write(
+        "The contribution under investigation is a method for translating "
+        "contextual requirements into evidence-bound, explainable design-time "
+        "compliance checks over static data-pipeline blueprints."
+    )
+    st.caption(
+        "The contribution is not Policy-as-Code or OPA itself. Those are "
+        "established technologies; the thesis investigates their design and "
+        "use in this evidence-bound assessment method."
+    )
+
+with st.expander("PoC evidence and evaluation basis", expanded=True):
+    st.markdown(
+        """
+        - **Architectural separation:** Policy is separated from application logic.
+        - **Independent evaluation:** OPA evaluates Rego rules against blueprint evidence.
+        - **Traceability:** Each rule exposes its interpretation, evidence, result, and remedy.
+        - **Evidence sufficiency:** `OK`, `FAIL`, and `HUMAN` distinguish satisfied,
+          negative, and insufficient evidence.
+        - **Reproducibility:** The same blueprint produces repeatable rule results.
+        - **Limit visibility:** Missing evidence, alternative interpretations, and
+          rule limitations are documented.
+        """
+    )
+
+# ---------------------------------------------------------------------
+# SCOPE AND LIMITATIONS
+# ---------------------------------------------------------------------
+
+with st.expander("Scope and limitations"):
+    st.warning(
+        """
+        This PoC does not encode an entire regulation, determine legal compliance
+        automatically, or validate runtime behaviour. It evaluates declared
+        design-time evidence against a bounded set of operational rules. A
+        successful result means that the encoded rule was satisfied by the
+        available evidence; it is not proof of legal compliance as a whole.
+        """
+    )
+
+st.caption(
+    "An intermediate representation may support future portability across "
+    "blueprint formats, but it is outside the scope of this PoC."
+)

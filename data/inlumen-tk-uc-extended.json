@@ -17,7 +17,25 @@
           "has_logging": true,
           "source_id": "tk_municipal_data_request",
           "approved_source": true
-        }
+        },
+        "template": {
+          "id": "core.source",
+          "name": "Custom"
+        },
+        "position": {
+          "x": 0,
+          "y": 0
+        },
+        "inputs": [],
+        "outputs": [
+          {
+            "id": "data",
+            "name": "data",
+            "type": "any",
+            "required": true,
+            "description": "Source data."
+          }
+        ]
       },
       {
         "id": "2",
@@ -27,7 +45,34 @@
         "parameters": {},
         "compliance_extensions": {
           "has_logging": true
-        }
+        },
+        "template": {
+          "id": "core.task",
+          "name": "Task"
+        },
+        "position": {
+          "x": 300,
+          "y": 0
+        },
+        "inputs": [
+          {
+            "id": "input",
+            "name": "input",
+            "type": "any",
+            "required": true,
+            "description": "Task input."
+          }
+        ],
+        "outputs": [
+          {
+            "id": "output",
+            "name": "output",
+            "type": "any",
+            "required": true,
+            "description": "Task output."
+          }
+        ],
+        "implementation": {}
       },
       {
         "id": "3",
@@ -37,7 +82,34 @@
         "parameters": {},
         "compliance_extensions": {
           "has_logging": true
-        }
+        },
+        "template": {
+          "id": "core.task",
+          "name": "Task"
+        },
+        "position": {
+          "x": 600,
+          "y": 0
+        },
+        "inputs": [
+          {
+            "id": "input",
+            "name": "input",
+            "type": "any",
+            "required": true,
+            "description": "Task input."
+          }
+        ],
+        "outputs": [
+          {
+            "id": "output",
+            "name": "output",
+            "type": "any",
+            "required": true,
+            "description": "Task output."
+          }
+        ],
+        "implementation": {}
       },
       {
         "id": "4",
@@ -47,7 +119,34 @@
         "parameters": {},
         "compliance_extensions": {
           "has_logging": true
-        }
+        },
+        "template": {
+          "id": "core.task",
+          "name": "Task"
+        },
+        "position": {
+          "x": 900,
+          "y": 0
+        },
+        "inputs": [
+          {
+            "id": "input",
+            "name": "input",
+            "type": "any",
+            "required": true,
+            "description": "Task input."
+          }
+        ],
+        "outputs": [
+          {
+            "id": "output",
+            "name": "output",
+            "type": "any",
+            "required": true,
+            "description": "Task output."
+          }
+        ],
+        "implementation": {}
       },
       {
         "id": "5",
@@ -57,7 +156,34 @@
         "parameters": {},
         "compliance_extensions": {
           "has_logging": true
-        }
+        },
+        "template": {
+          "id": "core.task",
+          "name": "Task"
+        },
+        "position": {
+          "x": 1200,
+          "y": 0
+        },
+        "inputs": [
+          {
+            "id": "input",
+            "name": "input",
+            "type": "any",
+            "required": true,
+            "description": "Task input."
+          }
+        ],
+        "outputs": [
+          {
+            "id": "output",
+            "name": "output",
+            "type": "any",
+            "required": true,
+            "description": "Task output."
+          }
+        ],
+        "implementation": {}
       },
       {
         "id": "6",
@@ -69,7 +195,34 @@
           "has_logging": true,
           "automated_decision_support": true,
           "human_oversight": false
-        }
+        },
+        "template": {
+          "id": "core.task",
+          "name": "Task"
+        },
+        "position": {
+          "x": 1500,
+          "y": 0
+        },
+        "inputs": [
+          {
+            "id": "input",
+            "name": "input",
+            "type": "any",
+            "required": true,
+            "description": "Task input."
+          }
+        ],
+        "outputs": [
+          {
+            "id": "output",
+            "name": "output",
+            "type": "any",
+            "required": true,
+            "description": "Task output."
+          }
+        ],
+        "implementation": {}
       },
       {
         "id": "7",
@@ -79,40 +232,47 @@
         "parameters": {},
         "compliance_extensions": {
           "has_logging": true
-        }
+        },
+        "template": {
+          "id": "core.destination",
+          "name": "Custom"
+        },
+        "position": {
+          "x": 1800,
+          "y": 0
+        },
+        "inputs": [
+          {
+            "id": "data",
+            "name": "data",
+            "type": "any",
+            "required": true,
+            "description": "Data to deliver."
+          }
+        ],
+        "outputs": []
       }
     ],
     "connections": [
       {
-        "id": "reactflow__edge-1-data-2-input",
+        "id": "reactflow__edge-6-output-7-data",
         "from": {
-          "node": "1",
+          "node": "6",
+          "port": "output"
+        },
+        "to": {
+          "node": "7",
           "port": "data"
-        },
-        "to": {
-          "node": "2",
-          "port": "input"
         }
       },
       {
-        "id": "reactflow__edge-2-output-3-input",
+        "id": "reactflow__edge-5-output-6-input",
         "from": {
-          "node": "2",
+          "node": "5",
           "port": "output"
         },
         "to": {
-          "node": "3",
-          "port": "input"
-        }
-      },
-      {
-        "id": "reactflow__edge-3-output-4-input",
-        "from": {
-          "node": "3",
-          "port": "output"
-        },
-        "to": {
-          "node": "4",
+          "node": "6",
           "port": "input"
         }
       },
@@ -128,25 +288,36 @@
         }
       },
       {
-        "id": "reactflow__edge-5-output-6-input",
+        "id": "reactflow__edge-3-output-4-input",
         "from": {
-          "node": "5",
+          "node": "3",
           "port": "output"
         },
         "to": {
-          "node": "6",
+          "node": "4",
           "port": "input"
         }
       },
       {
-        "id": "reactflow__edge-6-output-7-data",
+        "id": "reactflow__edge-2-output-3-input",
         "from": {
-          "node": "6",
+          "node": "2",
           "port": "output"
         },
         "to": {
-          "node": "7",
+          "node": "3",
+          "port": "input"
+        }
+      },
+      {
+        "id": "reactflow__edge-1-data-2-input",
+        "from": {
+          "node": "1",
           "port": "data"
+        },
+        "to": {
+          "node": "2",
+          "port": "input"
         }
       }
     ]

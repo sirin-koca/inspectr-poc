@@ -1,5 +1,5 @@
 {
-  "schema_version": "inlumen.project@2",
+  "schema_version": "inlumen.project@2 - TEST 1",
   "pipeline": {
     "nodes": [
       {
