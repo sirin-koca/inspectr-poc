@@ -34,7 +34,7 @@ with col1:
     """
 - **[GDPR Art. 25](https://gdpr-info.eu/art-25-gdpr/) - Privacy by Design: \n Pipeline Schema & Topography** 
 - **[GDPR Art. 30](https://gdpr-info.eu/art-30-gdpr/) - RoPA: \n Metadata & Lineage Definitions**
-- **[GDPR Art. 35](https://gdpr-info.eu/art-35-gdpr/) - DPIA: \n Risk Evaluation Thresholds**
+- **[GDPR Art. 35](https://gdpr-info.eu/art-35-gdpr/) - DPIA: \n Risk-Assessment Checkpoint**
 
     - What documentation is required
     - personal data protection
@@ -51,7 +51,7 @@ with col2:
     st.markdown("##### 2️⃣ Policy / The Semantic Gap")
     st.markdown(
     """
-    Legal texts are ambiguous, human-centric, and intentionally vague / flexible.
+    Legal texts are human-centric, and vague.
     Modern pipelines are continuous and automated.
     """
     )

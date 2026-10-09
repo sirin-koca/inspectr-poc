@@ -83,7 +83,7 @@ st.info(
 """
 )
 
-st.markdown("#### Upload and evaluate two blueprints")
+st.markdown("#### UPLOAD - EVALUATE - COMPARE")
 left, right = st.columns(2)
 
 with left:

@@ -80,7 +80,7 @@ st.sidebar.image(
 )
 st.sidebar.image(
     "images/uio.png",
-    width=150,
+    width=145,
 )
 # --------------------------------------------------
 # GLOBAL FOOTER

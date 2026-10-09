@@ -115,6 +115,11 @@ st.caption(
     "The page describes the blueprint; the evaluation page runs the Rego policy."
 )
 
+st.caption(
+    "DPIA scope: the current PoC checks for a designated risk-assessment "
+    "checkpoint. It does not verify that a DPIA was completed or that it "
+    "is legally adequate; both are outside the scope of this project."
+)
 # ---------------------------------------------------------------------
 # GDPR SCOPE AND EXECUTABLE RULES
 # ---------------------------------------------------------------------
